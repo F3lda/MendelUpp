@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:mendelupp/Common/change_notifiers.dart';
+import 'package:mendelupp/WebViewLogin/webview_login_page.dart';
 import 'package:provider/provider.dart';
 
 import 'web_view_test_page.dart';
@@ -149,7 +150,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   }
                   else if (defaultTargetPlatform == TargetPlatform.iOS || defaultTargetPlatform == TargetPlatform.android) {
                     // Some android/ios specific code
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => const WebViewApp()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const WebViewLoginPage()));
                   }
                   else if (defaultTargetPlatform == TargetPlatform.linux || defaultTargetPlatform == TargetPlatform.macOS || defaultTargetPlatform == TargetPlatform.windows || defaultTargetPlatform == TargetPlatform.fuchsia) {
                     // Some desktop specific code there
