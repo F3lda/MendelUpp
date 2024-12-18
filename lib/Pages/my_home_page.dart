@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import 'package:mendelupp/Common/change_notifiers.dart';
 import 'package:mendelupp/WebViewLogin/webview_login_page.dart';
@@ -30,7 +31,29 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  String loggedin = "";
+
   int _counter = 0;
+
+  Future<void> onLoggedIn() async {
+    const storage = FlutterSecureStorage();
+
+    print("START");
+    loggedin = (await storage.read(key: "Mfullname")) ?? "";
+    print(loggedin);
+    //setState(() {});
+  }
+
+
+  @override
+  void initState() {
+    super.initState();
+
+    onLoggedIn();
+    setState(() {});
+  }
+
+
 
   void _incrementCounter(BuildContext context) {
     var counter = context.read<Counter>();
@@ -76,7 +99,7 @@ class _MyHomePageState extends State<MyHomePage> {
           title: Text(widget.title),
           actions: <Widget>[Menu2()]
         ),
-        body: Center(
+        body: SingleChildScrollView(child: Center(
           // Center is a layout widget. It takes a single child and positions it
           // in the middle of the parent.
           child: Column(
@@ -95,8 +118,11 @@ class _MyHomePageState extends State<MyHomePage> {
             // wireframe for each widget.
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              Text(
+                'Prihlasen: $loggedin',
+              ),
               const Text(
-                'TEST You have pushed the button this many times:',
+                'You have pushed the button this many times:',
               ),
               Text(
                 '$_counter',
@@ -150,18 +176,32 @@ class _MyHomePageState extends State<MyHomePage> {
                   }
                   else if (defaultTargetPlatform == TargetPlatform.iOS || defaultTargetPlatform == TargetPlatform.android) {
                     // Some android/ios specific code
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => const WebViewLoginPage()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const WebViewLoginPage())).then((value) {
+                      onLoggedIn();
+                      setState(() {});
+                    });
                   }
                   else if (defaultTargetPlatform == TargetPlatform.linux || defaultTargetPlatform == TargetPlatform.macOS || defaultTargetPlatform == TargetPlatform.windows || defaultTargetPlatform == TargetPlatform.fuchsia) {
                     // Some desktop specific code there
                   }
 
                   },
-                child: const Text('WebView'),
+                child: const Text('Login Mendelu'),
+              ),
+              ElevatedButton(
+                onPressed: () async {
+                  const storage = FlutterSecureStorage();
+                  await storage.write(key: "Mfullname", value: "");
+                  await storage.write(key: "Musername", value: "");
+                  await storage.write(key: "Mpassword", value: "");
+                  await onLoggedIn();
+                  setState(() {});
+                },
+                child: const Text('Logout'),
               ),
             ],
           ),
-        ),
+        )),
         floatingActionButton: FloatingActionButton(
           onPressed: () => _incrementCounter(context),
           tooltip: 'Increment',
