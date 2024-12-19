@@ -3,6 +3,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import 'package:mendelupp/Common/change_notifiers.dart';
 import 'package:mendelupp/WebViewLogin/webview_login_page.dart';
+import 'package:mendelupp/WebViewRequest/webview_open_menza.dart';
 import 'package:provider/provider.dart';
 
 import 'web_view_test_page.dart';
@@ -171,21 +172,14 @@ class _MyHomePageState extends State<MyHomePage> {
               const SizedBox(height: 10),
               ElevatedButton(
                 onPressed: () {
-                  if (kIsWeb) {
-                    // Some web specific code there
-                  }
-                  else if (defaultTargetPlatform == TargetPlatform.iOS || defaultTargetPlatform == TargetPlatform.android) {
+                  if (defaultTargetPlatform == TargetPlatform.iOS || defaultTargetPlatform == TargetPlatform.android) {
                     // Some android/ios specific code
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => const WebViewLoginPage())).then((value) {
-                      onLoggedIn();
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const WebViewLoginPage())).then((value) async {
+                      await onLoggedIn();
                       setState(() {});
                     });
                   }
-                  else if (defaultTargetPlatform == TargetPlatform.linux || defaultTargetPlatform == TargetPlatform.macOS || defaultTargetPlatform == TargetPlatform.windows || defaultTargetPlatform == TargetPlatform.fuchsia) {
-                    // Some desktop specific code there
-                  }
-
-                  },
+                },
                 child: const Text('Login Mendelu'),
               ),
               ElevatedButton(
@@ -198,6 +192,17 @@ class _MyHomePageState extends State<MyHomePage> {
                   setState(() {});
                 },
                 child: const Text('Logout'),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  if (defaultTargetPlatform == TargetPlatform.iOS || defaultTargetPlatform == TargetPlatform.android) {
+                    // Some android/ios specific code
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const WebViewMenzaPage())).then((value) {
+                      setState(() {});
+                    });
+                  }
+                },
+                child: const Text('Show Menza'),
               ),
             ],
           ),

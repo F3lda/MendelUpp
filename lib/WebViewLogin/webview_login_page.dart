@@ -196,6 +196,7 @@ class _WebViewLoginPageState extends State<WebViewLoginPage> {
       body: SafeArea(
         child: Stack(
           children: [
+            const Center(child: CircularProgressIndicator()),
             Offstage(
               offstage: hideWebView,
               child: WebViewWidget(controller: controller)
