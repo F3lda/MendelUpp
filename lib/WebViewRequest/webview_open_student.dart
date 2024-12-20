@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import '../WebView/web_view_test_controls.dart';
@@ -132,6 +133,12 @@ class _WebViewStudentPageState extends State<WebViewStudentPage> {
           },
           onNavigationRequest: (navigation) {
 
+            if(navigation.url.toUpperCase().contains('DOWNLOAD')) {
+              _launchInBrowser(Uri.parse(navigation.url));
+
+              return NavigationDecision.prevent;
+            }
+
             //if(navigation.url.contains("https://is.mendelu.cz/auth/")) {
             //if (mounted) {setState(() {hideWebView = true;});}
 
@@ -152,6 +159,12 @@ class _WebViewStudentPageState extends State<WebViewStudentPage> {
         },
       );
     controller.loadRequest(Uri.parse('https://is.mendelu.cz/system/login.pl'));
+  }
+
+  Future<void> _launchInBrowser(Uri url) async {
+    if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
+      throw Exception('Could not launch $url');
+    }
   }
 
   @override
