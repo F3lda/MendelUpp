@@ -4,6 +4,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:mendelupp/Common/change_notifiers.dart';
 import 'package:mendelupp/WebViewLogin/webview_login_page.dart';
 import 'package:mendelupp/WebViewRequest/webview_open_menza.dart';
+import 'package:mendelupp/WebViewRequest/webview_open_student.dart';
 import 'package:provider/provider.dart';
 
 import 'web_view_test_page.dart';
@@ -122,7 +123,7 @@ class _MyHomePageState extends State<MyHomePage> {
               Text(
                 'Prihlasen: $loggedin',
               ),
-              const Text(
+              /*const Text(
                 'You have pushed the button this many times:',
               ),
               Text(
@@ -168,7 +169,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     Navigator.pop(context);
                   }},
                 child: const Text('Back'),
-              ),
+              ),*/
               const SizedBox(height: 10),
               ElevatedButton(
                 onPressed: () {
@@ -203,6 +204,17 @@ class _MyHomePageState extends State<MyHomePage> {
                   }
                 },
                 child: const Text('Show Menza'),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  if (defaultTargetPlatform == TargetPlatform.iOS || defaultTargetPlatform == TargetPlatform.android) {
+                    // Some android/ios specific code
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const WebViewStudentPage())).then((value) {
+                      setState(() {});
+                    });
+                  }
+                },
+                child: const Text('Show Student Portal'),
               ),
             ],
           ),

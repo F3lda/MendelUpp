@@ -43,7 +43,10 @@ class OffStageNotify with ChangeNotifier {
 class AppThemeChangeNotify with ChangeNotifier {
   ThemeMode themeMode = ThemeMode.system;
 
-  void toggle() {
+  void toggleTheme(BuildContext context) {
+    if (themeMode == ThemeMode.system) {
+      themeMode = Theme.of(context).brightness == Brightness.light ? ThemeMode.light : ThemeMode.dark;
+    }
     if (themeMode == ThemeMode.light) {
       themeMode = ThemeMode.dark;
     } else {
@@ -51,7 +54,7 @@ class AppThemeChangeNotify with ChangeNotifier {
     }
     notifyListeners();
   }
-  ThemeMode getValue() {
+  ThemeMode getCurrentTheme() {
     return themeMode;
   }
 }

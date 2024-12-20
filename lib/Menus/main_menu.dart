@@ -41,8 +41,7 @@ class _MenuState2 extends State<Menu2> {
       onSelected: (value) async {
         switch (value) {
           case _MenuOptions.themeMode:
-            var notifyer = context.read<AppThemeChangeNotify>();
-            notifyer.toggle();
+            context.read<AppThemeChangeNotify>().toggleTheme(context);
         }
       },
       itemBuilder: (context) => [
