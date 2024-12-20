@@ -14,7 +14,7 @@ class WebViewStudentPage extends StatefulWidget {
   State<WebViewStudentPage> createState() => _WebViewStudentPageState();
 }
 
-enum STUDENT {HOME, LOGIN, KONTA, /*ORDERS_PAGE,*/ ERROR}
+enum STUDENT {LOGIN, REDIRECT, REDIRECT2, DONE, ERROR}
 
 class _WebViewStudentPageState extends State<WebViewStudentPage> {
   late final WebViewController controller;
@@ -25,15 +25,11 @@ class _WebViewStudentPageState extends State<WebViewStudentPage> {
   String dataPassword = "";
   String dataLoggedin = "";
 
-  STUDENT pageState = STUDENT.HOME;
+  STUDENT webviewState = STUDENT.LOGIN;
 
   @override
   void initState() {
     super.initState();
-
-
-    //pageState = STUDENT.MAIN_PAGE;
-
     controller = WebViewController();
     controller
       ..setNavigationDelegate(
@@ -58,40 +54,11 @@ class _WebViewStudentPageState extends State<WebViewStudentPage> {
               print("URL: ${url}");
             }
 
-            if (pageState != STUDENT.KONTA) {
+            if (webviewState != STUDENT.DONE) {
 
-              if (url.contains('https://webiskam.mendelu.cz/Konta') && (pageState == STUDENT.LOGIN || pageState == STUDENT.HOME)) { // KONTA PAGE -> DONE
-                print("RESULT5");
-                pageState = STUDENT.KONTA;
-                controller.runJavaScriptReturningResult("setTimeout(function() {SHOWWEBVIEWtoFlutter.postMessage('SHOW');}, 330);");
-              } else if (url.contains('https://webiskam.mendelu.cz/ObjednavkyStravovani') && (pageState == STUDENT.LOGIN || pageState == STUDENT.HOME)) { // LOGGED IN -> show konta page
-                controller.loadRequest(Uri.parse('https://webiskam.mendelu.cz/Konta'));
-                print("RESULT4");
-              } else if (url.contains('https://webiskam.mendelu.cz/Home/Index?ReturnUrl=%2FObjednavkyStravovani') && pageState == STUDENT.HOME) { // NOT LOGGED IN -> show login form
+              if (url.contains('https://is.mendelu.cz/system/login.pl') && webviewState == STUDENT.LOGIN) {
                 if ((await controller.runJavaScriptReturningResult(
-                    'if (document.querySelector("form[action=\'/Prihlaseni/LogIn\'] input") != null) {true;} else {false;}'
-                )).toString() == "true") {
-                  print("LOGIN BUTTON");
-                  final result = (await controller.runJavaScriptReturningResult(
-                      'if (document.querySelector("form[action=\'/Prihlaseni/LogIn\'] input") != null) {document.querySelector("form[action=\'/Prihlaseni/LogIn\'] input").click(); true;} else {false;}'
-                  )).toString();
-                  print("RESULT1");
-                  print(result);
-                  if (result == "false") {
-                    if (mounted) {
-                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("ERROR when connecting to https://webiskam.mendelu.cz, please try again.")));
-                      Navigator.of(context).pop();
-                    }
-                    pageState = STUDENT.ERROR;
-                  } else {
-                    pageState = STUDENT.LOGIN;
-                  }
-                }
-              }
-
-              if (pageState == STUDENT.LOGIN) { // LOGGING IN...
-                if ((url.contains('https://alibaba.mendelu.cz/idp/profile/SAML2/Redirect/SSO;jsessionid=') || url.contains('https://alibaba.mendelu.cz/idp/profile/SAML2/Redirect/SSO?execution=')) && (await controller.runJavaScriptReturningResult(
-                    'if (document.getElementById("username") != null && document.getElementById("password") != null && document.querySelector("button[type=\'submit\']") != null) {true;} else {false;}'
+                    'if (document.getElementById("credential_0") != null && document.getElementById("credential_1") != null && document.querySelector("input[type=\'submit\']") != null) {true;} else {false;}'
                 )).toString() == "true") { // SHOWING LOGIN FORM
                   print("LOGIN FORM");
 
@@ -108,50 +75,54 @@ class _WebViewStudentPageState extends State<WebViewStudentPage> {
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("ERROR you are not logged in to MENDELU!")));
                       Navigator.of(context).pop();
                     }
-                    pageState = STUDENT.ERROR;
+                    webviewState = STUDENT.ERROR;
                   }
 
                   final result = (await controller.runJavaScriptReturningResult( //'document.getElementById("username") != null'
-                      'if (document.getElementById("username") != null && document.getElementById("password") != null && document.querySelector("button[type=\'submit\']") != null) {'
-                          "document.getElementById('username').value = '$dataUsername';"
-                          "document.getElementById('password').value = '$dataPassword';"
-                          'document.querySelector("button[type=\'submit\']").click();'
+                      'if (document.getElementById("credential_0") != null && document.getElementById("credential_1") != null && document.querySelector("input[type=\'submit\']") != null) {'
+                          "document.getElementById('credential_0').value = '$dataUsername';"
+                          "document.getElementById('credential_1').value = '$dataPassword';"
+                          'document.querySelector("input[type=\'submit\']").click();'
                           'true;} else {false;}'
                   )).toString();
                   print("RESULT2");
                   print(result);
                   if (result == "false") {
                     if (mounted) {
-                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("ERROR when logging in to https://webiskam.mendelu.cz, please try again.")));
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("ERROR when logging in to is.mendelu.cz, please try again.")));
                       Navigator.of(context).pop();
                     }
-                    pageState = STUDENT.ERROR;
+                    webviewState = STUDENT.REDIRECT;
                   }
-                } else if (url.contains('https://alibaba.mendelu.cz/idp/profile/SAML2/Redirect/SSO?execution=') && (await controller.runJavaScriptReturningResult(
-                    'if (document.forms[0] != null && document.forms[0].querySelector(\'input[type=\"submit\"][value=\"Accept\"]\') != null) {true;} else {false;}'
-                )).toString() == "true") { // SHOWING PERMISSIONS FORM
-                  print("PERMISSIONS");
-
-
-                  final result = (await controller.runJavaScriptReturningResult(
-                      'if (document.forms[0] != null && document.forms[0].querySelector(\'input[type=\"submit\"][value=\"Accept\"]\') != null) {document.forms[0].querySelector(\'input[type="submit"][value="Accept"]\').click(); true;} else {false;}'
-                  )).toString();
-                  print("RESULT3");
-                  print(result);
-                  if (result == "false") {
-                    if (mounted) {
-                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("ERROR when logging in to https://webiskam.mendelu.cz, please try again.")));
-                      Navigator.of(context).pop();
-                    }
-                    pageState = STUDENT.ERROR;
-                  }
-                } else {
-                  print("unknown redirect");
                 }
               }
 
-            }
+              if (url.contains("https://is.mendelu.cz/auth/") && webviewState != STUDENT.REDIRECT2) {
+                // two redirects when logging in -> first can be undefined
+                if (webviewState == STUDENT.LOGIN) { // redirect 1
+                  webviewState = STUDENT.REDIRECT;
+                } else if (webviewState == STUDENT.REDIRECT) { // redirect 2
+                  webviewState = STUDENT.REDIRECT2;
+                } else { // error
+                  if (mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("ERROR while logging in to is.mendelu.cz, please try again.")));
+                    Navigator.of(context).pop();
+                  }
+                }
 
+                if (webviewState == STUDENT.REDIRECT2) { // LOGGED IN -> show konta page
+                  controller.loadRequest(Uri.parse('https://is.mendelu.cz/auth/student/moje_studium.pl'));
+                  print("goto StudentPortal");
+                }
+              }
+
+              if (url.contains("https://is.mendelu.cz/auth/student/moje_studium.pl") && webviewState == STUDENT.REDIRECT2) {
+                print("StudentPortal - DONE");
+                webviewState = STUDENT.DONE;
+                controller.runJavaScriptReturningResult("setTimeout(function() {SHOWWEBVIEWtoFlutter.postMessage('SHOW');}, 330);");
+              }
+
+            }
 
             if (mounted) {
               setState(() {
@@ -180,7 +151,7 @@ class _WebViewStudentPageState extends State<WebViewStudentPage> {
           }
         },
       );
-    controller.loadRequest(Uri.parse('https://webiskam.mendelu.cz/ObjednavkyStravovani'));
+    controller.loadRequest(Uri.parse('https://is.mendelu.cz/system/login.pl'));
   }
 
   @override
@@ -193,10 +164,10 @@ class _WebViewStudentPageState extends State<WebViewStudentPage> {
           ),
           title: const Text('Student Portal Mendelu'),
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-          /*actions: [
+          actions: [
             NavigationControls(controller: controller),
-            Menu(controller: controller),
-          ],*/
+            //Menu(controller: controller),
+          ],
         ),
         body: SafeArea(
             child: Stack(

@@ -9,7 +9,10 @@ import 'FakeWebView/FakeWebView.dart';
 
 //flutter packages get -> to get packages
 //flutter pub add webview_flutter -> to install package
+
+//flutter build apk --release
 //flutter run --release --> install release app
+//https://github.com/juliansteenbakker/flutter_secure_storage/issues/748
 
 
 void main() {

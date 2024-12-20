@@ -43,7 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
     print("START");
     loggedin = (await storage.read(key: "Mfullname")) ?? "";
     print(loggedin);
-    //setState(() {});
+    setState(() {});
   }
 
 
@@ -52,7 +52,6 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
 
     onLoggedIn();
-    setState(() {});
   }
 
 
@@ -176,8 +175,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   if (defaultTargetPlatform == TargetPlatform.iOS || defaultTargetPlatform == TargetPlatform.android) {
                     // Some android/ios specific code
                     Navigator.push(context, MaterialPageRoute(builder: (context) => const WebViewLoginPage())).then((value) async {
-                      await onLoggedIn();
-                      setState(() {});
+                      onLoggedIn();
                     });
                   }
                 },
@@ -189,8 +187,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   await storage.write(key: "Mfullname", value: "");
                   await storage.write(key: "Musername", value: "");
                   await storage.write(key: "Mpassword", value: "");
-                  await onLoggedIn();
-                  setState(() {});
+                  onLoggedIn();
                 },
                 child: const Text('Logout'),
               ),
@@ -219,11 +216,11 @@ class _MyHomePageState extends State<MyHomePage> {
             ],
           ),
         )),
-        floatingActionButton: FloatingActionButton(
+        /*floatingActionButton: FloatingActionButton(
           onPressed: () => _incrementCounter(context),
           tooltip: 'Increment',
           child: const Icon(Icons.add),
-        ), // This trailing comma makes auto-formatting nicer for build methods.
+        ),*/ // This trailing comma makes auto-formatting nicer for build methods.
       )
     );
   }
