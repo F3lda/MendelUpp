@@ -181,11 +181,23 @@ class _WebViewMenzaPageState extends State<WebViewMenzaPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (didPop, result) async {
+        if (!didPop) {
+          final messenger = ScaffoldMessenger.of(context);
+          if (await controller.canGoBack()) {
+            await controller.goBack();
+          } else {
+            messenger.showSnackBar(const SnackBar(content: Text('No back history item')));
+          }
+        }
+      },
+      child: Scaffold(
         appBar: AppBar(
           leading: IconButton(
-              onPressed: () => Navigator.of(context).pop(),
-              icon: const CloseButtonIcon()
+            onPressed: () => Navigator.of(context).pop(),
+            icon: const CloseButtonIcon()
           ),
           title: const Text('Menza Mendelu'),
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -195,17 +207,18 @@ class _WebViewMenzaPageState extends State<WebViewMenzaPage> {
           ],
         ),
         body: SafeArea(
-            child: Stack(
-              children: [
-                const Center(child: CircularProgressIndicator()),
-                Offstage(
-                    offstage: hideWebView,
-                    child: WebViewWidget(controller: controller)
-                ),
-                if (loadingPercentage < 100) LinearProgressIndicator(value: loadingPercentage / 100.0)
-              ],
-            )
+          child: Stack(
+            children: [
+              const Center(child: CircularProgressIndicator()),
+              Offstage(
+                offstage: hideWebView,
+                child: WebViewWidget(controller: controller)
+              ),
+              if (loadingPercentage < 100) LinearProgressIndicator(value: loadingPercentage / 100.0)
+            ],
+          )
         )
+      )
     );
   }
 }

@@ -54,6 +54,7 @@ class AppThemeChangeNotify with ChangeNotifier {
     }
     notifyListeners();
   }
+
   ThemeMode getCurrentTheme() {
     return themeMode;
   }
