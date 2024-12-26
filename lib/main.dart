@@ -14,6 +14,10 @@ import 'FakeWebView/FakeWebView.dart';
 //flutter run --release --> install release app
 //https://github.com/juliansteenbakker/flutter_secure_storage/issues/748
 
+// icons
+// pubspec.yml -> flutter_launcher_icons:
+// flutter pub run flutter_launcher_icons (to generate new icons)
+
 
 void main() {
   runApp(MultiProvider(
