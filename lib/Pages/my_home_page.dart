@@ -3,9 +3,11 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import 'package:mendelupp/Common/change_notifiers.dart';
 import 'package:mendelupp/WebViewLogin/webview_login_page.dart';
+import 'package:mendelupp/WebViewRequest/webview_open_map.dart';
 import 'package:mendelupp/WebViewRequest/webview_open_menza.dart';
 import 'package:mendelupp/WebViewRequest/webview_open_student.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'web_view_test_page.dart';
 import 'package:mendelupp/Menus/main_menu.dart';
@@ -213,6 +215,29 @@ class _MyHomePageState extends State<MyHomePage> {
                 },
                 child: const Text('Show Student Portal'),
               ),
+              ElevatedButton(
+                onPressed: () {
+                  if (defaultTargetPlatform == TargetPlatform.iOS || defaultTargetPlatform == TargetPlatform.android) {
+                    // Some android/ios specific code
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const WebViewMapPage())).then((value) {
+                      setState(() {});
+                    });
+                  }
+                },
+                child: const Text('Show Map Widget'),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  /*if (defaultTargetPlatform == TargetPlatform.iOS || defaultTargetPlatform == TargetPlatform.android) {
+                    // Some android/ios specific code
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const WebViewMapPage())).then((value) {
+                      setState(() {});
+                    });
+                  }*/
+                  _launchInBrowser(Uri.parse("https://moje.mendelu.cz/"));
+                },
+                child: const Text('Open Moje Mendelu'),
+              ),
             ],
           ),
         )),
@@ -223,6 +248,12 @@ class _MyHomePageState extends State<MyHomePage> {
         ),*/ // This trailing comma makes auto-formatting nicer for build methods.
       )
     );
+  }
+
+  Future<void> _launchInBrowser(Uri url) async {
+    if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
+      throw Exception('Could not launch $url');
+    }
   }
 
   void _showToast(BuildContext context) {

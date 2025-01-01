@@ -93,8 +93,14 @@ class _WebViewStudentPageState extends State<WebViewStudentPage> {
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("ERROR when logging in to is.mendelu.cz, please try again.")));
                       Navigator.of(context).pop();
                     }
-                    webviewState = STUDENT.REDIRECT;
+                    webviewState = STUDENT.ERROR;
                   }
+                } else {
+                  if (mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("ERROR when logging in to is.mendelu.cz, please try again.")));
+                    Navigator.of(context).pop();
+                  }
+                  webviewState = STUDENT.ERROR;
                 }
               }
 
@@ -190,7 +196,7 @@ class _WebViewStudentPageState extends State<WebViewStudentPage> {
           title: const Text('Student Portal Mendelu'),
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
           actions: [
-            NavigationControls(controller: controller),
+            if (!hideWebView) NavigationControls(controller: controller),
             //Menu(controller: controller),
           ],
         ),

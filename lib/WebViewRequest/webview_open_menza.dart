@@ -82,6 +82,12 @@ class _WebViewMenzaPageState extends State<WebViewMenzaPage> {
                   } else {
                     webviewState = MENZA.LOGIN;
                   }
+                } else {
+                  if (mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("ERROR when connecting to https://webiskam.mendelu.cz, please try again.")));
+                    Navigator.of(context).pop();
+                  }
+                  webviewState = MENZA.ERROR;
                 }
               }
 
@@ -202,7 +208,7 @@ class _WebViewMenzaPageState extends State<WebViewMenzaPage> {
           title: const Text('Menza Mendelu'),
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
           actions: [
-            NavigationControls(controller: controller),
+            if (!hideWebView) NavigationControls(controller: controller),
             //Menu(controller: controller),
           ],
         ),
