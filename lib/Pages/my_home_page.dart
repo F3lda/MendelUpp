@@ -121,8 +121,15 @@ class _MyHomePageState extends State<MyHomePage> {
             // wireframe for each widget.
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text(
-                'Prihlasen: $loggedin',
+              Center(child: Padding(padding: const EdgeInsets.symmetric(vertical:15, horizontal: 10), child: Text(
+          (loggedin != "") ? '$loggedin, vítejte!' : 'Vítejte!\nPřihlašte se do aplikace.', textAlign: TextAlign.center,
+                style: const TextStyle(
+                  //color: Colors.white,
+                  fontSize: 34.0,
+                  fontWeight: FontWeight.bold
+                ),
+              ),
+              ),
               ),
               /*const Text(
                 'You have pushed the button this many times:',
@@ -238,9 +245,41 @@ class _MyHomePageState extends State<MyHomePage> {
                 },
                 child: const Text('Open Moje Mendelu'),
               ),
+
+
+
+
+              CardButton(
+                  color: null,
+                  image: const AssetImage("assets/images/StudentPortal.png"),
+                  text: "Student Portal", onTap: () {}),
+
+              CardButton(
+                  color: null,
+                  image: const AssetImage("assets/images/menza.jpg"),
+                 text: "Menza - ISKAM", onTap: () {}),
+
+              CardButton(
+                  color: null,
+                  image: const AssetImage("assets/images/MyMendelu-map.png"),
+                  text: "Map Widget", onTap: () {}),
+
+              CardButton(
+                  color: null,
+                  image: const AssetImage("assets/images/MojeMendelu.png"),
+                  text: "Moje MEMNDELU", onTap: () {}),
+
+              //CardButton(color: const Color(0xFF7abf17), image: null, text: "Moje MENDELU", onTap: () {}),
+
+
+
+
+
+
             ],
           ),
         )),
+
         /*floatingActionButton: FloatingActionButton(
           onPressed: () => _incrementCounter(context),
           tooltip: 'Increment',
@@ -264,5 +303,92 @@ class _MyHomePageState extends State<MyHomePage> {
         action: SnackBarAction(label: 'UNDO', onPressed: scaffold.hideCurrentSnackBar),
       ),
     );
+  }
+}
+
+
+
+
+class CardButton extends StatefulWidget {
+  const CardButton({super.key, required this.color, required this.image, required this.text, required this.onTap});
+
+  final String text;
+  final Color? color;
+  final ImageProvider<Object>? image;
+  final Function onTap;
+
+  @override
+  State<CardButton> createState() => _CardButtonState();
+}
+
+class _CardButtonState extends State<CardButton> {
+
+
+  @override
+  void initState() {
+    super.initState();
+
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+
+        padding: const EdgeInsets.all(10),
+        child: Ink(
+          /* foregroundDecoration: BoxDecoration(
+    color: Colors.grey,
+    backgroundBlendMode: BlendMode.saturation,
+  ),*/
+          //color: const Color(0xFF7abf17),
+            height: 100,
+            width: double.maxFinite,
+            //margin: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: widget.color,
+              //color: const Color(0xFF7abf17),
+              //border: Border.all(color: Colors.white),
+              border: Border.all(color: Colors.grey.shade600,width:0.3),
+              borderRadius: BorderRadius.circular(10),
+              image: (widget.color == null && widget.image != null) ? DecorationImage(
+                    image: widget.image!,
+
+                        /*NetworkImage("https://www.smsticket.cz/cdn/events/2015/5056-absolventsky-networking-pefkaru/315.jpg"),*/
+                    fit: BoxFit.cover,
+                  ) : null,
+
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey,
+                  blurRadius: 8.0,
+                  spreadRadius: 4.0,
+                  offset: Offset(4.0, 4.0), // shadow direction: bottom right
+                ),
+              ],
+            ),
+            child: InkWell(
+              onTap: () => widget.onTap, // Handle your callback
+              child: Card(
+                semanticContainer: true,
+                clipBehavior: Clip.antiAliasWithSaveLayer,
+                color: Colors.black.withOpacity(0.3),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10)),
+                child: Center(
+                  child: Text(
+                    widget.text,
+                    //"Menza - ISKAM",
+                    style: TextStyle(
+                        fontSize: 32,
+                        //color: const Color(0xff96f11b),
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600),
+                  ),
+                ),
+                elevation: 3,
+                margin: EdgeInsets.all(10),
+              ),
+            )))
+    ;
   }
 }

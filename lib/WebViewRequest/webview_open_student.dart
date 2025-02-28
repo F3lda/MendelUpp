@@ -211,7 +211,20 @@ class _WebViewStudentPageState extends State<WebViewStudentPage> {
               if (loadingPercentage < 100) LinearProgressIndicator(value: loadingPercentage / 100.0)
             ],
           )
-        )
+        ),
+        bottomNavigationBar: (!hideWebView) ? BottomAppBar(
+          child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Expanded(child: IconButton(tooltip: 'Rozvrh hodin', icon: Icon(Icons.home), onPressed: () {  },),),
+              Expanded(child: IconButton(icon: Icon(Icons.show_chart), onPressed: () {  },),),
+              Expanded(child: IconButton(icon: Icon(Icons.tab), onPressed: () {  },),),
+              Expanded(child: IconButton(icon: Icon(Icons.settings), onPressed: () {  },),),
+              Expanded(child: IconButton(icon: Icon(Icons.check), onPressed: () {  },),),
+              Expanded(child: IconButton(icon: Icon(Icons.recommend), onPressed: () {  },),),
+            ],
+          ),
+        ) : null,
       )
     );
   }

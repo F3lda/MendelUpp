@@ -53,9 +53,11 @@ class AppThemeChangeNotify with ChangeNotifier {
       themeMode = ThemeMode.light;
     }
     notifyListeners();
+    // TODO save to SharedPreferences
   }
 
   ThemeMode getCurrentTheme() {
+    // TODO load from SharedPreferences
     return themeMode;
   }
 }
