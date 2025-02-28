@@ -11,10 +11,7 @@ class WebViewLoginPage extends StatefulWidget {
   State<WebViewLoginPage> createState() => _WebViewLoginPageState();
 }
 
-
-
 enum LOGIN {PAGE, REDIRECT, REDIRECT2, DONE}
-
 
 class _WebViewLoginPageState extends State<WebViewLoginPage> {
   late final WebViewController controller;
@@ -26,6 +23,8 @@ class _WebViewLoginPageState extends State<WebViewLoginPage> {
   String dataLoggedin = "";
 
   LOGIN webviewState = LOGIN.PAGE;
+
+  bool webviewError = false;
 
   @override
   void initState() {
@@ -45,14 +44,25 @@ class _WebViewLoginPageState extends State<WebViewLoginPage> {
           onProgress: (progress) {
             if (mounted) {setState(() {loadingPercentage = progress;});}
           },
+          onWebResourceError: (WebResourceError error) {
+            webviewError = true;
+            WidgetsBinding.instance.addPostFrameCallback((_) async {
+              print("WidgetsBinding build");
+
+              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("ERROR when connecting to https://is.mendelu.cz, probably no internet connection.")));
+              Navigator.of(context).pop();
+            });
+          },
           onPageFinished: (url) async {
             if (kDebugMode) {
               print("URL: $url");
             }
 
+            if (webviewError) {return;}
+
             if (webviewState != LOGIN.DONE) {
 
-              if (url.contains('https://is.mendelu.cz/system/login.pl') && webviewState == LOGIN.PAGE) {
+              if (url.toLowerCase().contains('https://is.mendelu.cz/system/login.pl'.toLowerCase()) && webviewState == LOGIN.PAGE) {
                 final result = (await controller.runJavaScriptReturningResult(
                     "if (typeof SHOWWEBVIEWtoFlutter !== 'undefined' && typeof USERNAMEtoFlutter !== 'undefined' && typeof PASSWORDtoFlutter !== 'undefined'){"
                         "window.onbeforeunload = function (e) {USERNAMEtoFlutter.postMessage(document.getElementById('credential_0').value); PASSWORDtoFlutter.postMessage(document.getElementById('credential_1').value);};"
@@ -95,7 +105,7 @@ class _WebViewLoginPageState extends State<WebViewLoginPage> {
                 }
               }
 
-              if (url.contains("https://is.mendelu.cz/auth/") && webviewState != LOGIN.DONE) {
+              if (url.toLowerCase().contains("https://is.mendelu.cz/auth/".toLowerCase()) && webviewState != LOGIN.DONE) {
                 // two redirects when logging in -> first can be undefined
                 if (webviewState == LOGIN.PAGE) { // redirect 1
                   webviewState = LOGIN.REDIRECT;
@@ -146,16 +156,6 @@ class _WebViewLoginPageState extends State<WebViewLoginPage> {
 
             if (mounted) {setState(() {loadingPercentage = 100;});}
           },
-          /*onNavigationRequest: (navigation) {
-
-            //if(navigation.url.contains("https://is.mendelu.cz/auth/")) {
-              //if (mounted) {setState(() {hideWebView = true;});}
-
-              //return NavigationDecision.prevent;
-            //}
-
-            return NavigationDecision.navigate;
-          },*/
         ),
       )
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
@@ -178,25 +178,7 @@ class _WebViewLoginPageState extends State<WebViewLoginPage> {
         onMessageReceived: (message) {
           dataPassword = message.message;
         },
-      )
-      /*..addJavaScriptChannel(
-        'LOGGEDINtoFlutter',
-        onMessageReceived: (message) async {
-          if (message.message != '') {
-            dataLoggedin = message.message.split(":")[1].trim();
-
-            // Create storage
-            const storage = FlutterSecureStorage();
-            await storage.write(key: "Mfullname", value: dataLoggedin);
-            await storage.write(key: "Musername", value: dataUsername);
-            await storage.write(key: "Mpassword", value: dataPassword);
-
-
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Prihlasen: $dataLoggedin")));
-            Navigator.of(context).pop();
-          }
-        },
-      )*/;
+      );
     controller.loadRequest(Uri.parse('https://is.mendelu.cz/system/login.pl'));
   }
 

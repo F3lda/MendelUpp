@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-import '../WebView/web_view_test_controls.dart';
-import '../WebView/web_view_test_menu.dart';
+import '../WebView/webview_controls.dart';
+import '../WebView/webview_popscope.dart';
 
 
 class WebViewMenzaPage extends StatefulWidget {
@@ -26,6 +26,8 @@ class _WebViewMenzaPageState extends State<WebViewMenzaPage> {
   String dataLoggedin = "";
 
   MENZA webviewState = MENZA.HOME;
+
+  bool webviewError = false;
 
   @override
   void initState() {
@@ -49,21 +51,31 @@ class _WebViewMenzaPageState extends State<WebViewMenzaPage> {
               });
             }
           },
+          onWebResourceError: (WebResourceError error) {
+            webviewError = true;
+            WidgetsBinding.instance.addPostFrameCallback((_) async {
+              print("WidgetsBinding build");
+
+              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("ERROR when connecting to https://webiskam.mendelu.cz, probably no internet connection.")));
+              Navigator.of(context).pop();
+            });
+          },
           onPageFinished: (url) async {
             if (kDebugMode) {
               print("URL: ${url}");
             }
 
-            if (webviewState != MENZA.KONTA) {
+            if (webviewError) {return;}
 
-              if (url.contains('https://webiskam.mendelu.cz/Konta') && (webviewState == MENZA.LOGIN || webviewState == MENZA.HOME)) { // KONTA PAGE -> DONE
+            if (webviewState != MENZA.KONTA) {
+              if (url.toLowerCase().contains('https://webiskam.mendelu.cz/Konta'.toLowerCase()) && (webviewState == MENZA.LOGIN || webviewState == MENZA.HOME)) { // KONTA PAGE -> DONE
                 print("RESULT5");
                 webviewState = MENZA.KONTA;
                 controller.runJavaScriptReturningResult("setTimeout(function() {SHOWWEBVIEWtoFlutter.postMessage('SHOW');}, 330);");
-              } else if (url.contains('https://webiskam.mendelu.cz/ObjednavkyStravovani') && (webviewState == MENZA.LOGIN || webviewState == MENZA.HOME)) { // LOGGED IN -> show konta page
+              } else if (url.toLowerCase().contains('https://webiskam.mendelu.cz/ObjednavkyStravovani'.toLowerCase()) && (webviewState == MENZA.LOGIN || webviewState == MENZA.HOME)) { // LOGGED IN -> show konta page
                 controller.loadRequest(Uri.parse('https://webiskam.mendelu.cz/Konta'));
                 print("RESULT4");
-              } else if (url.contains('https://webiskam.mendelu.cz/Home/Index?ReturnUrl=%2FObjednavkyStravovani') && webviewState == MENZA.HOME) { // NOT LOGGED IN -> show login form
+              } else if (url.toLowerCase().contains('https://webiskam.mendelu.cz/Home/Index?ReturnUrl=%2fObjednavkyStravovani'.toLowerCase()) && webviewState == MENZA.HOME) { // NOT LOGGED IN -> show login form
                 if ((await controller.runJavaScriptReturningResult(
                     'if (document.querySelector("form[action=\'/Prihlaseni/LogIn\'] input") != null) {true;} else {false;}'
                 )).toString() == "true") {
@@ -92,7 +104,7 @@ class _WebViewMenzaPageState extends State<WebViewMenzaPage> {
               }
 
               if (webviewState == MENZA.LOGIN) { // LOGGING IN...
-                if ((url.contains('https://alibaba.mendelu.cz/idp/profile/SAML2/Redirect/SSO;jsessionid=') || url.contains('https://alibaba.mendelu.cz/idp/profile/SAML2/Redirect/SSO?execution=')) && (await controller.runJavaScriptReturningResult(
+                if ((url.toLowerCase().contains('https://alibaba.mendelu.cz/idp/profile/SAML2/Redirect/SSO;jsessionid='.toLowerCase()) || url.toLowerCase().contains('https://alibaba.mendelu.cz/idp/profile/SAML2/Redirect/SSO?execution='.toLowerCase())) && (await controller.runJavaScriptReturningResult(
                     'if (document.getElementById("username") != null && document.getElementById("password") != null && document.querySelector("button[type=\'submit\']") != null) {true;} else {false;}'
                 )).toString() == "true") { // SHOWING LOGIN FORM
                   print("LOGIN FORM");
@@ -129,7 +141,7 @@ class _WebViewMenzaPageState extends State<WebViewMenzaPage> {
                     }
                     webviewState = MENZA.ERROR;
                   }
-                } else if (url.contains('https://alibaba.mendelu.cz/idp/profile/SAML2/Redirect/SSO?execution=') && (await controller.runJavaScriptReturningResult(
+                } else if (url.toLowerCase().contains('https://alibaba.mendelu.cz/idp/profile/SAML2/Redirect/SSO?execution='.toLowerCase()) && (await controller.runJavaScriptReturningResult(
                     'if (document.forms[0] != null && document.forms[0].querySelector(\'input[type=\"submit\"][name=\"_eventId_proceed\"]\') != null) {true;} else {false;}'
                 )).toString() == "true") { // SHOWING PERMISSIONS FORM
                   print("PERMISSIONS");
@@ -161,16 +173,6 @@ class _WebViewMenzaPageState extends State<WebViewMenzaPage> {
               });
             }
           },
-          onNavigationRequest: (navigation) {
-
-            //if(navigation.url.contains("https://is.mendelu.cz/auth/")) {
-            //if (mounted) {setState(() {hideWebView = true;});}
-
-            //return NavigationDecision.prevent;
-            //}
-
-            return NavigationDecision.navigate;
-          },
         ),
       )
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
@@ -187,18 +189,8 @@ class _WebViewMenzaPageState extends State<WebViewMenzaPage> {
 
   @override
   Widget build(BuildContext context) {
-    return PopScope(
-      canPop: false,
-      onPopInvokedWithResult: (didPop, result) async {
-        if (!didPop) {
-          final messenger = ScaffoldMessenger.of(context);
-          if (await controller.canGoBack()) {
-            await controller.goBack();
-          } else {
-            messenger.showSnackBar(const SnackBar(content: Text('No back history item')));
-          }
-        }
-      },
+    return WebViewPopScope(
+      controller: controller,
       child: Scaffold(
         appBar: AppBar(
           leading: IconButton(
@@ -208,8 +200,7 @@ class _WebViewMenzaPageState extends State<WebViewMenzaPage> {
           title: const Text('Menza Mendelu'),
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
           actions: [
-            if (!hideWebView) NavigationControls(controller: controller),
-            //Menu(controller: controller),
+            if (!hideWebView) WebViewControls(controller: controller),
           ],
         ),
         body: SafeArea(

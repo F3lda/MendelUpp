@@ -1,12 +1,9 @@
-// Copyright 2022 The Flutter Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
-
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-class NavigationControls extends StatelessWidget {
-  const NavigationControls({required this.controller, super.key});
+
+class WebViewControls extends StatelessWidget {
+  const WebViewControls({required this.controller, super.key});
 
   final WebViewController controller;
 
@@ -21,10 +18,7 @@ class NavigationControls extends StatelessWidget {
             if (await controller.canGoBack()) {
               await controller.goBack();
             } else {
-              messenger.showSnackBar(
-                const SnackBar(content: Text('No back history item')),
-              );
-              return;
+              messenger.showSnackBar(const SnackBar(content: Text('No back history item')));
             }
           },
         ),
@@ -35,10 +29,7 @@ class NavigationControls extends StatelessWidget {
             if (await controller.canGoForward()) {
               await controller.goForward();
             } else {
-              messenger.showSnackBar(
-                const SnackBar(content: Text('No forward history item')),
-              );
-              return;
+              messenger.showSnackBar(const SnackBar(content: Text('No forward history item')));
             }
           },
         ),

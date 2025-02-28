@@ -4,8 +4,9 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-import '../WebView/web_view_test_controls.dart';
-import '../WebView/web_view_test_menu.dart';
+import '../Common/utils.dart';
+import '../WebView/webview_controls.dart';
+import '../WebView/webview_popscope.dart';
 
 
 class WebViewStudentPage extends StatefulWidget {
@@ -28,6 +29,8 @@ class _WebViewStudentPageState extends State<WebViewStudentPage> {
 
   STUDENT webviewState = STUDENT.LOGIN;
 
+  bool webviewError = false;
+
   @override
   void initState() {
     super.initState();
@@ -38,7 +41,6 @@ class _WebViewStudentPageState extends State<WebViewStudentPage> {
           onPageStarted: (url) {
             if (mounted) {
               setState(() {
-                //hideWebView = true;
                 loadingPercentage = 0;
               });
             }
@@ -50,14 +52,25 @@ class _WebViewStudentPageState extends State<WebViewStudentPage> {
               });
             }
           },
+          onWebResourceError: (WebResourceError error) {
+            webviewError = true;
+            WidgetsBinding.instance.addPostFrameCallback((_) async {
+              print("WidgetsBinding build");
+
+              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("ERROR when connecting to https://is.mendelu.cz, probably no internet connection.")));
+              Navigator.of(context).pop();
+            });
+          },
           onPageFinished: (url) async {
             if (kDebugMode) {
               print("URL: ${url}");
             }
 
+            if (webviewError) {return;}
+
             if (webviewState != STUDENT.DONE) {
 
-              if (url.contains('https://is.mendelu.cz/system/login.pl') && webviewState == STUDENT.LOGIN) {
+              if (url.toLowerCase().contains('https://is.mendelu.cz/system/login.pl'.toLowerCase()) && webviewState == STUDENT.LOGIN) {
                 if ((await controller.runJavaScriptReturningResult(
                     'if (document.getElementById("credential_0") != null && document.getElementById("credential_1") != null && document.querySelector("input[type=\'submit\']") != null) {true;} else {false;}'
                 )).toString() == "true") { // SHOWING LOGIN FORM
@@ -104,7 +117,7 @@ class _WebViewStudentPageState extends State<WebViewStudentPage> {
                 }
               }
 
-              if (url.contains("https://is.mendelu.cz/auth/") && webviewState != STUDENT.REDIRECT2) {
+              if (url.toLowerCase().contains("https://is.mendelu.cz/auth/".toLowerCase()) && webviewState != STUDENT.REDIRECT2) {
                 // two redirects when logging in -> first can be undefined
                 if (webviewState == STUDENT.LOGIN) { // redirect 1
                   webviewState = STUDENT.REDIRECT;
@@ -123,7 +136,7 @@ class _WebViewStudentPageState extends State<WebViewStudentPage> {
                 }
               }
 
-              if (url.contains("https://is.mendelu.cz/auth/student/moje_studium.pl") && webviewState == STUDENT.REDIRECT2) {
+              if (url.toLowerCase().contains("https://is.mendelu.cz/auth/student/moje_studium.pl".toLowerCase()) && webviewState == STUDENT.REDIRECT2) {
                 print("StudentPortal - DONE");
                 webviewState = STUDENT.DONE;
                 controller.runJavaScriptReturningResult("setTimeout(function() {SHOWWEBVIEWtoFlutter.postMessage('SHOW');}, 330);");
@@ -140,16 +153,10 @@ class _WebViewStudentPageState extends State<WebViewStudentPage> {
           onNavigationRequest: (navigation) {
 
             if(navigation.url.toUpperCase().contains('DOWNLOAD')) {
-              _launchInBrowser(Uri.parse(navigation.url));
+              launchInBrowser(context, Uri.parse(navigation.url));
 
               return NavigationDecision.prevent;
             }
-
-            //if(navigation.url.contains("https://is.mendelu.cz/auth/")) {
-            //if (mounted) {setState(() {hideWebView = true;});}
-
-            //return NavigationDecision.prevent;
-            //}
 
             return NavigationDecision.navigate;
           },
@@ -167,26 +174,10 @@ class _WebViewStudentPageState extends State<WebViewStudentPage> {
     controller.loadRequest(Uri.parse('https://is.mendelu.cz/system/login.pl'));
   }
 
-  Future<void> _launchInBrowser(Uri url) async {
-    if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
-      throw Exception('Could not launch $url');
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
-    return PopScope(
-      canPop: false,
-      onPopInvokedWithResult: (didPop, result) async {
-        if (!didPop) {
-          final messenger = ScaffoldMessenger.of(context);
-          if (await controller.canGoBack()) {
-            await controller.goBack();
-          } else {
-            messenger.showSnackBar(const SnackBar(content: Text('No back history item')));
-          }
-        }
-      },
+    return WebViewPopScope(
+      controller: controller,
       child: Scaffold(
         appBar: AppBar(
           leading: IconButton(
@@ -196,8 +187,7 @@ class _WebViewStudentPageState extends State<WebViewStudentPage> {
           title: const Text('Student Portal Mendelu'),
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
           actions: [
-            if (!hideWebView) NavigationControls(controller: controller),
-            //Menu(controller: controller),
+            if (!hideWebView) WebViewControls(controller: controller),
           ],
         ),
         body: SafeArea(
@@ -214,14 +204,26 @@ class _WebViewStudentPageState extends State<WebViewStudentPage> {
         ),
         bottomNavigationBar: (!hideWebView) ? BottomAppBar(
           child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Expanded(child: IconButton(tooltip: 'Rozvrh hodin', icon: Icon(Icons.home), onPressed: () {  },),),
-              Expanded(child: IconButton(icon: Icon(Icons.show_chart), onPressed: () {  },),),
-              Expanded(child: IconButton(icon: Icon(Icons.tab), onPressed: () {  },),),
-              Expanded(child: IconButton(icon: Icon(Icons.settings), onPressed: () {  },),),
-              Expanded(child: IconButton(icon: Icon(Icons.check), onPressed: () {  },),),
-              Expanded(child: IconButton(icon: Icon(Icons.recommend), onPressed: () {  },),),
+              Expanded(child: IconButton(tooltip: 'Rozvrh hodin', icon: Icon(Icons.schedule), onPressed: () {
+                controller.loadRequest(Uri.parse('https://is.mendelu.cz/auth/katalog/rozvrhy_view.pl?rozvrh_student_obec=1'));
+              },),),
+              Expanded(child: IconButton(tooltip: 'Moje předměty', icon: Icon(Icons.view_list), onPressed: () {
+                controller.loadRequest(Uri.parse('https://is.mendelu.cz/auth/student/list.pl'));
+              },),),
+              Expanded(child: IconButton(tooltip: 'Odevzdávárna', icon: Icon(Icons.drive_folder_upload), onPressed: () {
+                controller.loadRequest(Uri.parse('https://is.mendelu.cz/auth/student/odevzdavarny.pl'));
+              },),),
+              Expanded(child: IconButton(tooltip: 'Přihlašování na zkoušky', icon: Icon(Icons.school), onPressed: () {
+                controller.loadRequest(Uri.parse('https://is.mendelu.cz/auth/student/terminy_seznam.pl'));
+              },),),
+              Expanded(child: IconButton(tooltip: 'Registrace předmětů', icon: Icon(Icons.checklist), onPressed: () {
+                controller.loadRequest(Uri.parse('https://is.mendelu.cz/auth/student/registrace.pl'));
+              },),),
+              Expanded(child: IconButton(tooltip: 'E-index', icon: Icon(Icons.explicit_outlined), onPressed: () {
+                controller.loadRequest(Uri.parse('https://is.mendelu.cz/auth/student/pruchod_studiem.pl'));
+              },),),
             ],
           ),
         ) : null,
