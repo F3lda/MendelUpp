@@ -1,4 +1,4 @@
-# mendelupp
+# MendelUpp
 
 Mendelu Unofficial Student App
 
