@@ -1,0 +1,105 @@
+div.jstm-toolbox {
+  position: absolute;
+  margin: -34px 0 0 5px;
+  z-index: 100;
+}
+div.jstm-toolbox > .jstm-toolbox-inside {
+  cursor: hand;
+  position: relative;
+  background: rgb(247, 247, 247);
+  border: 1px solid #ccc;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  line-height: 16px;
+  height: 30px;
+  -moz-box-shadow: 0px 1px 3px #ccc;
+  -webkit-box-shadow: 0px 1px 3px #ccc;
+  box-shadow: 0px 1px 3px #ccc;
+}
+div.jstm-toolbox > .jstm-toolbox-inside > .jstm-toolbox-actions {
+  padding: 2px;
+  text-align: center;
+  display: flex;
+  gap: 4px;
+}
+div.jstm-toolbox img {
+  width: 16px;
+  height: 16px;
+  margin: 5px 5px;
+}
+div.jstm-toolbox a {
+  display: inline-block;
+  height: 26px;
+  width: 26px;
+  transition: all 0.3s ease;
+  border-radius: 2px;
+}
+div.jstm-toolbox a:hover {
+  transition: all 0.1s ease;
+  background-color: #dddddd;
+}
+div.jstm-toolbox a:has(.uf-icon):active {
+  transition: all 0.1s ease;
+  background-color: #c9c9c9;
+}
+div.jstm-toolbox a:has(.uf-icon)[data-enabled=true] {
+  background-color: #dddddd;
+  outline: 1px solid black;
+}
+
+.jstm-sort-header {
+  position: relative;
+  cursor: pointer;
+  filter: none; /* this can be removed once its not overwriting the school-specific css */
+}
+
+.jstm-sort-header::after,
+.jstm-sort-header-up::after,
+.jstm-sort-header-down::after {
+  content: "";
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 10px;
+  height: 10px;
+  margin-top: 2px;
+  right: 6px;
+  position: absolute;
+}
+
+.jstm-sort-header::after {
+  background-image: url(/img.pl?sysid=header-sort);
+}
+
+.jstm-sort-header-up::after {
+  background-image: url(/img.pl?sysid=header-sort-up);
+}
+
+.jstm-sort-header-down::after {
+  background-image: url(/img.pl?sysid=header-sort-down);
+}
+
+.JSTFFilteredRow {
+  display: none;
+}
+
+.UISTFSignChange {
+  cursor: pointer;
+  margin: 0 2px 0 0;
+  vertical-align: middle;
+  border: 1px solid black;
+  border-radius: 50rem;
+  padding-inline: 3px;
+  background: #eee;
+  user-select: none;
+}
+
+.UISTMNumberCell {
+  text-align: right;
+}
+
+.UISTMNumberCellHidden {
+  display: none;
+}
+
+/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22../../input/jstm/jstm.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAKA;EACC;EACA;EACG;;AAEA;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;;AAIR;EACI;EACA;EACA;;AAGJ;EACI;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;;AAIA;EACI;EACA;;AAGJ;EACI;EACA;;;AAWhB;EACI;EACA;EACA;;;AAEJ;AAAA;AAAA;EAGI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;;AAEJ;EACI;;;AAEJ;EACC;;;AAED;EACC;;;AAKD;EACC;;;AAGD;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;;AAGJ;EACC;;;AAGD;EACC%22,%22file%22:%22jstm.css%22%7D */

@@ -11,6 +11,8 @@ import 'package:mendelupp/Menus/main_popup_menu.dart';
 import 'package:flutter/foundation.dart';
 
 import '../Common/utils.dart';
+import '../WebViewGuest/webview_guest_menza.dart';
+import '../WebViewGuest/webview_guest_student.dart';
 
 
 class HomePage extends StatefulWidget {
@@ -71,9 +73,15 @@ class _HomePageState extends State<HomePage> {
               text: "Student Portal", onTap: () {
                 if (defaultTargetPlatform == TargetPlatform.iOS || defaultTargetPlatform == TargetPlatform.android) {
                   // Some android/ios specific code
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => const WebViewStudentPage())).then((value) {
-                    setState(() {});
-                  });
+                  if (loggedInUsername == 'GUEST') {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const WebViewGuestStudent())).then((value) {
+                      setState(() {});
+                    });
+                  } else {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const WebViewStudentPage())).then((value) {
+                      setState(() {});
+                    });
+                  }
                 }
               }
             ),
@@ -84,9 +92,15 @@ class _HomePageState extends State<HomePage> {
               text: "Menza - ISKAM", onTap: () {
                 if (defaultTargetPlatform == TargetPlatform.iOS || defaultTargetPlatform == TargetPlatform.android) {
                   // Some android/ios specific code
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => const WebViewMenzaPage())).then((value) {
-                    setState(() {});
-                  });
+                  if (loggedInUsername == 'GUEST') {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const WebViewGuestMenza())).then((value) {
+                      setState(() {});
+                    });
+                  } else {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const WebViewMenzaPage())).then((value) {
+                      setState(() {});
+                    });
+                  }
                 }
               }
             ),

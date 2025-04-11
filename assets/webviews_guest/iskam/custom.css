@@ -1,0 +1,50 @@
+.NoLayout {
+	margin: 0;
+	height:100%;
+}
+
+.NoLayout body {
+	margin: 0;
+	height:100%;
+}
+
+.jidelnicek {
+	margin: 0;
+	height:100%;
+	background: #005500;
+	background-image: linear-gradient(to right, #005500, #007700);
+}
+
+.jidelnicek .nadpis {
+	display: none;
+}
+
+.jidelnicek .gramaz-column {
+	display: none;
+}
+
+.jidelnicek .cena-column {
+	display: none;
+}
+
+.jidelnicek .foto-column {
+	display: none;
+}
+
+.jidelnicek .zalozka {
+	font-size: 20px;
+	color: #7BBE10;
+}
+
+.jidelnicek .mena {
+	font-size: 20px;
+}
+
+.jidelnicek .piktogram-column {
+	width: 95px;
+	/*display: none;*/
+}
+
+.jidelnicek .image-container {
+  justify-content: flex-end;  
+}

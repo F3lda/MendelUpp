@@ -1,0 +1,302 @@
+br.clear {
+    clear: both;
+}
+
+a img {
+    border: 0px solid black;
+}
+
+a{
+	color:rgb(88,88,90);
+       text-decoration:none;
+}
+
+a:hover{
+	color:black;
+        text-decoration:underline;
+}
+
+
+table {
+    font-size: 13px !important;
+}
+
+div.cleaner {
+    clear: both;
+    font-size: 0px;
+}
+
+#foot {
+    background-color: rgb(141,190,71);
+    font-weight: bold;
+    vertical-align: middle;
+   padding:3px 0;
+   padding-left:20px;
+}
+
+#foot a {
+    color: white;
+    text-decoration: none;
+}
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
+
+tr.sudy {
+    background-color: #dcdcdc;
+}
+
+th.zahlavi, td.zahlavi, tr.zahlavi td, tr.zahlavi th {
+    padding-left: 5px;
+    padding-right: 5px;
+    font-weight: bold;
+    background-color: rgb(141,190,71);
+    color: black;
+}
+
+pre {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+span.small, div.small, .small, .small28, .small415, .xsmall28, .xsmall415, .ysmall, .xsmall, .ysmall28, .ysmall415 {
+    color: #333;
+}
+
+div.small, span.small, .small28, .small415, .xsmall28, .xsmall415, .ysmall, .xsmall, .ysmall28, .ysmall415 {
+    color: #333;
+    width: 810px;
+    text-align: justify;
+}
+
+td span.small, td div.small, td .small, td .small28, td .small415, td .xsmall28, td .xsmall415, td .ysmall, td .xsmall, td .ysmall28, td .ysmall415 {
+    color: black;
+}
+
+td div.small, td span.small, td .small28, td .small415, td .xsmall28, td .xsmall415, td .ysmall, td .xsmall, td .ysmall28, td .ysmall415 {
+    color: black;
+}
+
+th span.small, th div.small, th .small, th .small28, th .small415, th .xsmall28, th .xsmall415, th .ysmall, th .xsmall, th .ysmall28, th .ysmall415 {
+    color: black;
+}
+
+tr.zahlavi span.small, tr.zahlavi div.small, tr.zahlavi .small, tr.zahlavi .small28, tr.zahlavi .small415, tr.zahlavi .xsmall28, tr.zahlavi .xsmall415, tr.zahlavi .ysmall, tr.zahlavi .xsmall, tr.zahlavi .ysmall28, tr.zahlavi .ysmall415 {
+    color: black;
+}
+
+.focused, tr.uis-hl-table:hover {
+    background-color: #f6d29c;
+}
+
+.portlet {
+    text-align: left;
+    padding: 5px;
+    background-color: rgb(141,190,71);
+    margin-bottom: 2px;
+}
+
+.sideportlet {
+    padding: 5px;
+    background-color: rgb(141,190,71);
+    text-align: left;
+    margin:3px 0;
+}
+
+.portlet a {
+    color: black;
+}
+
+.sideportlet a {
+    color: black;
+}
+
+html{
+	margin:2px 5px; padding:0;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size: 12pt;
+	color:black;
+	background:white;
+	min-width:780px;
+}
+
+body{
+	margin:0; padding:0;
+	color:black;
+}
+
+a img{
+	border:0;
+}
+
+#stranka{
+	background:rgb(237,237,238);
+}
+
+#logo{
+	width:150px;
+       text-align:center;
+}
+
+#hlavicka{
+	background:rgb(141,190,70) url('/img.pl?unid=25954');
+}
+
+#hlavicka table, #hlavicka tr, #hlavicka td, #hlavicka tbody, #hlavicka th{
+	margin:0; 
+	border-collapse:collapse; 
+	padding:0; 
+	border:0;
+}
+
+#hlavicka table{
+	width:100%;
+}
+
+#dekor-obr{
+	width:50%;
+	background: url('/img.pl?unid=43585') left top no-repeat;
+	height:102px;
+}
+
+#fakulty{
+	width:50%
+}
+
+#fakulty a{
+	color:white; display:block; text-decoration:none;
+}
+
+#af{
+	background:rgb(198,138,17);
+	height:20px;
+	border-bottom:1px solid white;
+}
+
+#ldf{
+	background:rgb(0,103,55);
+	height:20px;
+	border-bottom:1px solid white;
+}
+
+#pef{
+	background:rgb(0,102,179);
+	height:20px;
+	border-bottom:1px solid white;
+}
+
+#zf{
+	background:rgb(152,51,29);
+	height:20px;
+	border-bottom:1px solid white;
+}
+
+#icv{
+	background:rgb(0,154,177);
+	height:21px; line-height:21px;
+}
+
+#frrms{
+	background:rgb(195,23,129);
+	height:20px; line-height:21px;
+        border-bottom:1px solid white;
+}
+
+#navigace1{
+	width:150px !important;
+	color:white;
+	font-size:11px;
+	font-weight:bold;
+	white-space:nowrap;
+}
+
+#navigace1 a{
+	color:white;
+	text-decoration:none;
+}
+
+#navigace1 a:hover{
+	text-decoration:underline;
+}
+
+#navigace1 ul{
+	margin:0; padding:0;
+	list-style-position:inside;
+        list-style:none;
+}
+
+#navigace1 li{
+	margin:0; padding:0 0 0 5px;
+}
+
+#navigace1 li#posledni{
+	margin-top:15px;
+}
+
+#horni-navigace{
+	background:white;
+}
+
+#horni-navigace table{
+	height:20px; width:100%; margin:0; padding:0; border-collapse:collapse;
+	color:rgb(88,88,90);
+	font-weight:bold; font-size:90% !important;
+}
+
+#horni-navigace td{
+        margin:0;; text-align:center;
+	 width:33%;
+}
+
+#horni-navigace a{
+	color:rgb(88,88,90);
+	text-decoration:none;
+}
+
+h1{
+	/* border-top:4px solid rgb(141,190,71); */
+	padding: 3px 0;
+	margin:0 0 0px 0;
+	color:rgb(141,190,71);
+	font-variant:small-caps;
+	font-size:140%;
+}
+
+hr{
+  border:0;
+  margin:3px 0; padding:0;
+  border-top:4px solid rgb(141,190,71);
+}
+
+#content{
+     padding-left:5px;
+     background:rgb(237,237,238);
+}
+
+.mainpage{
+  background:white;
+  padding:0 10px;
+	color:black;
+}
+
+td#ikonky{
+  text-align:right;
+}
+
+td#ikonky img{
+  margin:0 2px;
+}
+
+td#prihlasen{
+  text-align:left;
+}
+
+form{
+  _color:black !important;
+ border:1px solid white;
+} 

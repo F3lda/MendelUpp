@@ -169,17 +169,34 @@ class _WebViewLoginPageState extends State<WebViewLoginPage> {
       )
       ..addJavaScriptChannel(
         'USERNAMEtoFlutter',
-        onMessageReceived: (message) {
+        onMessageReceived: (message) async {
           dataUsername = message.message;
+          await _checkGuestLogin();
         },
       )
       ..addJavaScriptChannel(
         'PASSWORDtoFlutter',
-        onMessageReceived: (message) {
+        onMessageReceived: (message) async {
           dataPassword = message.message;
+          await _checkGuestLogin();
         },
       );
     controller.loadRequest(Uri.parse('https://is.mendelu.cz/system/login.pl'));
+  }
+
+  Future<void> _checkGuestLogin() async {
+    if (dataUsername == 'GUEST' && dataPassword == 'GUEST') {
+      webviewState = LOGIN.DONE;
+      // Create storage
+      const storage = FlutterSecureStorage();
+      await storage.write(key: "Mfullname", value: dataUsername);
+      await storage.write(key: "Musername", value: dataUsername);
+      await storage.write(key: "Mpassword", value: dataPassword);
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Prihlasen: $dataUsername")));
+        Navigator.of(context).pop();
+      }
+    }
   }
 
   @override

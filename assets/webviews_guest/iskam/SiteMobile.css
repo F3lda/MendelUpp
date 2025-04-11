@@ -1,0 +1,2495 @@
+﻿/*-----------------------------------------*/
+/*-----------------------------------------*/
+/*-------------  Novy web  ----------------*/
+/*-----------------------------------------*/
+/*-----------------------------------------*/
+
+
+/* ------------------------------------- */
+/*             Main Blocks               */
+
+
+body {
+    background: #EFEFEF;
+}
+
+h3 {
+    font-weight: 400 !important;
+}
+
+h2 {
+    font-weight: 400 !important;
+}
+
+th, td {
+    vertical-align: middle !important;
+}
+
+tr > th > label {
+    margin-bottom: 0px !important;
+}
+
+.section-spacing-min {
+    margin: 7px 0px !important;
+}
+
+.section-spacing-max {
+    margin: 20px 0px !important;
+}
+
+.vert-cent {
+    display: block;
+}
+
+#topHeader {
+    width: 100%;
+    /*background-color: #222222;*/
+    margin-bottom: 0px;
+    height: 60px;
+    -webkit-box-shadow: 0px 5px 22px -4px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 5px 22px -4px rgba(0,0,0,0.75);
+    box-shadow: 0px 5px 22px -4px rgba(0,0,0,0.75);
+    border-radius: 0px !important;
+    border-color: transparent !important;
+}
+
+#topHeaderTest {
+    width: 100%;
+    background-color: RGB(0,255,0);
+    margin-bottom: 0px;
+    height: 60px;
+    -webkit-box-shadow: 0px 5px 22px -4px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 5px 22px -4px rgba(0,0,0,0.75);
+    box-shadow: 0px 5px 22px -4px rgba(0,0,0,0.75);
+    border-radius: 0px !important;
+    border-color: transparent !important;
+}
+
+
+#main {
+    padding: 0px;
+}
+
+
+span.Error {
+    color: Red;
+    font-size: 14px;
+    text-align: center;
+}
+
+span.bold {
+    font-weight: bold;
+}
+
+@media(min-width:768px) {
+    .maincontent {
+        margin: 40px 20px;
+    }
+}
+
+@media(min-width:341px) and (max-width:767px) {
+    .maincontent {
+        margin: 30px 5px 40px 5px;
+    }
+}
+
+@media(max-width:340px) {
+    .maincontent {
+        margin: 30px 0px 40px 0px;
+    }
+}
+
+
+@media(min-width:768px) {
+    .content {
+        margin: 10px 30px 30px 30px;
+    }
+}
+
+@media(max-width:767px) {
+    .content {
+        margin: 10px 30px 30px 25px;
+    }
+}
+
+.header-to-container {
+    max-width: 1105px !important;
+}
+
+.alignment-to-container {
+    padding-right: 15px;
+}
+
+/*.navbar-header{
+    padding-right: 15px;
+}*/
+
+.main-container {
+    padding-bottom: 60px;
+    min-height: 100vh;
+}
+
+.vcenter {
+    vertical-align: middle;
+}
+
+#footer {
+    padding-top: 8px;
+    border: 0px;
+}
+
+.glyph-info {
+    margin: 0px 5px;
+}
+
+/*.dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0;
+}*/
+
+.footer-font {
+    color: #505050;
+}
+
+.footer-button {
+    margin: 20px;
+    height: 50px;
+}
+
+.footer-table-correction {
+    padding: 0px 5px 0px 0px !important;
+}
+
+.predcisli {
+    max-width: 100px;
+}
+
+.kod-banky {
+    max-width: 80px;
+}
+
+.table-labels {
+    white-space: nowrap;
+    float: left;
+}
+
+/*.organizace 
+{
+    position:absolute;
+    width:auto;
+    margin: 20px 0px -60px 0px;
+    bottom:0;
+    text-align:center;
+    right:0;
+    left:0;
+
+}*/
+
+.organizace {
+    margin-top: 30px;
+    bottom: 0;
+}
+
+html, body {
+    height: 100%;
+}
+
+.container {
+    height: auto;
+}
+
+.fill {
+    height: auto;
+    min-height: 100%;
+}
+
+.navbar-logo {
+    margin-top: -4px;
+}
+
+
+
+/*.dropdown:hover > .dropdown-toggle {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    border-top: 4px;
+    border-top-color: @oranzova;
+    border-top-style: solid;
+    
+}*/
+
+.dropdown:hover > .dropdown-toggle {
+    --box-shadow-color: @oranzova;
+    box-shadow: inset 0 5px 0 0;
+}
+
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+    --box-shadow-color: @oranzova;
+    box-shadow: inset 0 5px 0 0;
+}
+
+.sportoviste-null-info:hover > .sportoviste-null-info {
+    --box-shadow-color: @oranzova;
+    box-shadow: inset 0 5px 0 0;
+}
+
+/*
+.sidebar-nav > .sidebar-brand a:hover {
+    color: #ff9933;
+    background: none;
+    border-left: 5px solid #ff9933*/
+
+.footer-styling {
+}
+
+/* --------------login-------------------- */
+
+@media(min-width:1200px) {
+    .user-image {
+        margin: 19px 0 0 -17px;
+    }
+}
+
+@media(max-width:1199px) {
+    .user-image {
+        margin: 19px 40px 0 37px;
+    }
+}
+
+
+@media(min-width: 768px) {
+    #logo-iskam4 {
+        margin: 10px 0px 15px 0px;
+    }
+}
+
+@media(max-width: 767px) {
+    #logo-iskam4, {
+        margin: 20px 0px 25px 0px;
+    }
+}
+
+.logo-iskam, .logo-relax {
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0);
+    max-width: 495px;
+    height: 170px;
+}
+
+@media(min-width:360px) and (max-width:475px) {
+    .logo-iskam, .logo-relax {
+        height: 140px;
+    }
+}
+
+@media(max-width:359px) {
+    .logo-iskam, .logo-relax {
+        height: 120px;
+    }
+}
+
+@media(min-width: 768px) {
+    #logo-iskam4-log, #logo-relax-log {
+        margin: 10px 0px 15px 0px;
+    }
+}
+
+@media(max-width: 767px) {
+    #logo-iskam4-log, #logo-relax-log {
+        margin: 20px 0px 25px 0px;
+    }
+}
+
+.logo-iskam-log, .logo-relax-log {
+    position: relative;
+    left: 53%;
+    transform: translate(-50%, 0);
+    max-width: 275px;
+    height: 94px;
+}
+
+.btn-login {
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%, 0);
+    margin: 15px 0px;
+}
+
+/*UVITANI A PRIHLASENI*/
+
+.login-responsive {
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+}
+
+.table-login {
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100vw;
+    -webkit-box-shadow: 0px 0px 30px 3px rgba(0,0,0,0.33);
+    -moz-box-shadow: 0px 0px 30px 3px rgba(0,0,0,0.33);
+    box-shadow: 0px 0px 30px 3px rgba(0,0,0,0.33);
+}
+
+@media only screen and (orientation:landscape) and (max-height:620px) {
+    .table-login {
+        top: 50%;
+    }
+}
+
+@media (max-width: 576px) and (min-height:476px) {
+    .table-login {
+        top: 0;
+        left: 0;
+        transform: initial;
+        width: 100vw;
+        box-shadow: none;
+    }
+}
+
+/*vertikalni*/
+
+@media (max-width: 576px) and (min-height:476px) {
+    #uvitaciObrazovka {
+        height: 100vh;
+    }
+}
+/*background:#e6e7e8;*/
+
+@media (min-width: 768px) and (min-height:476px) {
+    #uvitaciObrazovka {
+        height: 290px;
+    }
+}
+
+@media (min-width: 577px) and (max-width: 767px) and (min-height:476px) {
+    #uvitaciObrazovka {
+        height: 330px;
+    }
+}
+
+/*horizontalni*/
+
+@media (max-height:475px) {
+    #uvitaciObrazovka {
+        height: 100vh;
+    }
+}
+
+@media (max-height:475px) {
+    .table-login {
+        width: 100vw;
+        box-shadow: none;
+    }
+}
+
+.table-login-log {
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 550px;
+    -webkit-box-shadow: 0px 0px 30px 3px rgba(0,0,0,0.33);
+    -moz-box-shadow: 0px 0px 30px 3px rgba(0,0,0,0.33);
+    box-shadow: 0px 0px 30px 3px rgba(0,0,0,0.33);
+}
+
+@media only screen and (orientation:landscape) and (max-height:475px) {
+    .table-login-log {
+        top: 50%;
+    }
+}
+
+@media (max-width: 576px) and (min-height:476px) {
+    .table-login-log {
+        top: 0;
+        left: 0;
+        transform: initial;
+        width: 100vw;
+        box-shadow: none;
+    }
+}
+
+@media only screen and (orientation: portrait) and (max-height:475px) {
+    .login-content {
+        top: 70% !important;
+    }
+}
+
+@media only screen and (orientation: landscape) and (max-height:475px) {
+    .login-content {
+        top: 60% !important;
+    }
+}
+
+@media only screen and (orientation: portrait) and (max-height:475px) {
+    .login-content-log {
+        top: 70% !important;
+    }
+}
+
+@media only screen and (orientation: landscape) and (max-height:475px) {
+    .login-content-log {
+        top: 60% !important;
+    }
+}
+
+
+
+@media (max-height:475px) {
+    .text-uvitaci {
+        margin-top: 10px !important;
+    }
+}
+
+@media (max-height:475px), (max-width:576px) {
+    #footerOrganizace {
+        display: none;
+    }
+}
+
+@media (max-height:475px), (max-width:576px) {
+    #footerText {
+        display: none;
+    }
+}
+
+@media(max-width:545px) {
+    #levyKontakt {
+        white-space: nowrap;
+        float: inherit;
+    }
+
+    #pravyKontakt {
+        white-space: nowrap;
+        float: inherit;
+    }
+}
+
+@media(min-width:546px) {
+    #levyKontakt {
+        white-space: nowrap;
+        float: right !important;
+    }
+
+    #pravyKontakt {
+        white-space: nowrap;
+        float: left !important;
+    }
+}
+
+
+/*@media (max-height:475px), (max-width:576px) {
+    #zobrazitPanelNastaveni:before {
+        content:'ahoj';
+    }
+    #zobrazitPanelNastaveni:after {
+        content:'goodbye';
+    }
+}*/
+
+.login-content {
+    position: absolute;
+    top: 49%;
+    left: 49%;
+    transform: translate(-50%, -50%);
+}
+
+.login-content-log {
+    position: absolute;
+    top: 51%;
+    left: 49%;
+    transform: translate(-50%, -50%);
+}
+
+@media(min-width:620px) {
+    .table-width {
+        min-width: 495px;
+    }
+}
+
+@media(max-width:619px) {
+    .table-width {
+        width: 80vw;
+    }
+}
+
+
+#prihlaseniTabulka {
+    height: 290px;
+}
+
+
+
+@media (min-height:476px) {
+    .text-uvitaci {
+        margin-top: 40px !important;
+    }
+}
+
+.space {
+    height: 60px;
+    background-color: transparent !important;
+}
+
+/*POUZE PRIHLASENI*/
+
+/*vertikalni*/
+
+#prihlaseniTabulka {
+    max-width: 100vw;
+}
+
+
+@media (max-width: 576px) and (min-height:476px) {
+    #prihlaseniTabulka {
+        height: 100vh;
+        border: none;
+    }
+}
+/*background:#e6e7e8;*/
+
+@media (min-width: 768px) and (min-height:476px) {
+    #prihlaseniTabulka {
+        height: 400px;
+    }
+}
+
+@media (min-width: 577px) and (max-width: 767px) and (min-height:476px) {
+    #prihlaseniTabulka {
+        height: 400px;
+    }
+}
+
+/*horizontalni*/
+
+@media (max-height:475px) {
+    #prihlaseniTabulka {
+        height: 100vh;
+        border: none;
+    }
+}
+
+@media (max-height:475px) {
+    #logo-iskam4 {
+        display: none;
+    }
+}
+
+/* Hover dropdown */
+
+@media (min-width: 979px) {
+    ul.nav li.dropdown:hover > ul.dropdown-menu {
+        display: block;
+    }
+}
+
+.navbar {
+    z-index: 1200 !important;
+}
+
+.table-objednavky {
+    max-width: 500px !important;
+}
+
+.borderless td, .borderless th {
+    border: none !important;
+}
+
+.nav-spacer {
+    height: 60px;
+}
+
+.form-control-sm {
+    max-height: 30px;
+    border-bottom-right-radius: 0em !important;
+    border-top-right-radius: 0em !important;
+}
+
+.form-control-btn-sm {
+    border-bottom-left-radius: 0em !important;
+    border-top-left-radius: 0em !important;
+}
+
+/*.btn-sm{
+    background-color: #ff9933!important;
+}*/
+
+
+/* todo - kvuli rekapitulaci rezervace 
+
+table > tbody > tr > td{
+    font-weight:normal!important;
+}
+
+*/
+
+.form-btn-align {
+    margin-left: -11px !important;
+}
+
+.poznamka-hvezdicka {
+    font-style: italic !important;
+}
+
+.text-centering {
+    text-align: center;
+}
+
+.img-centering {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.text-bold {
+    font-weight: bold;
+}
+
+.table-fill {
+    width: 100%;
+    vertical-align: central;
+}
+
+.button-center {
+    left: 50%;
+}
+
+
+.table td.tdCenter, th.tdCenter {
+    padding-right: 10px;
+    /*text-align: center;*/
+}
+
+.table td.tdRight, th.tdRight {
+    padding-right: 10px;
+    text-align: right;
+}
+
+.table td.tdMena, th.tdMena {
+    padding-right: 10px;
+    text-align: right;
+}
+
+#tablePrevodyUhrady td {
+    padding: 2px !important;
+}
+
+#tablePrevodyUhrady th {
+    padding: 2px !important;
+}
+
+
+.formPrevodyUhrady {
+    margin: 20px;
+}
+
+.mujcenter {
+    margin-top: 20px;
+    left: 43%;
+    position: inherit;
+}
+
+#informaceContainer {
+    margin-bottom: 20px;
+}
+/*
+#tableVolneKapacityNahled{
+    margin-top: 40px;
+}
+*/
+.btn-sm-table {
+    color: #333;
+    margin-right: 20px;
+}
+
+/*#333*/
+.btn-color {
+    background-color: #997047;
+}
+
+
+#KatalogForm > div {
+    margin-left: 0 !important;
+}
+
+#Podrobnosti {
+    vertical-align: central;
+}
+
+.pad-left {
+    padding-left:15px;
+}
+
+.table-well-aligning {
+    text-align: right !important;
+}
+
+.table-th-spacing {
+    margin-right: 20px;
+}
+
+.table-cells-spacing {
+    width: 25px;
+}
+
+.loginout {
+    margin-left: 25px;
+}
+
+.languageTop {
+    display: none;
+}
+
+
+.languageTopH {
+    height: 50px;
+}
+
+.languageTopButt {
+    margin-top: 6px;
+}
+
+.navbar-nav li a {
+    line-height: 30px !important;
+}
+
+#smlouvaKUbytovani th {
+    text-align: right;
+}
+
+#smlouvaKUbytovani td {
+    font-weight: normal !important;
+}
+
+.block-centering {
+    text-align: center;
+}
+
+.block-centering-inner {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+.errorText {
+    text-align: center;
+}
+
+/*@media (max-width: 767px) {
+   #footer-levy{
+        margin-bottom:-4px;
+    }
+    #footer-pravy{
+        margin-top:-4px;
+        margin-bottom:4px;
+    }
+}*/
+
+@media (min-width: 768px) {
+    #footer-pravy {
+        margin-bottom: -2px;
+    }
+}
+
+
+@media only screen and (max-height: 480px) and (orientation: landscape) {
+    #footerallways {
+        display: none !important;
+    }
+}
+
+.noncorrect-centering {
+    left: 40%;
+    position: relative;
+}
+
+td > label {
+    font-weight: normal !important;
+}
+
+
+
+
+
+@media (max-width: 767px) {
+    #menuHamburger {
+        margin-top: 13px;
+    }
+}
+
+
+/*nefacha*/
+.label-normal-weight {
+    font-weight: normal !important;
+}
+
+.form-center {
+    left: 43%;
+}
+
+
+.center-nonblock {
+    margin: 0 auto;
+    float: inherit !important;
+}
+
+.nadpis-table {
+    text-align: center;
+    font-size: 20px;
+    height: 40px;
+    margin-top: 10px;
+}
+@media (max-width: 475px) {
+    .nadpis-table-dlhy {
+        margin-bottom: 25px;
+    }
+}
+
+#vyberPoradnik {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.nova-zadost-margin {
+    margin: 25px 0 35px 0px !important;
+}
+
+.center-block-inh {
+    margin: 25px auto 15px auto !important;
+    display: block !important;
+    float: inherit !important;
+}
+
+/*.formular{
+    margin-top:20px;
+}*/
+
+
+@media (max-width:767px) {
+    #Podrobnosti {
+        margin-left: 20px;
+    }
+}
+
+#Podrobnosti > form > div > div > div > div > label {
+    font-weight: normal !important;
+}
+
+#tableEditaceRekap > div > div > div > div > label {
+    font-weight: normal !important;
+}
+
+#PoradnikyForm div > div > label {
+    white-space: normal;
+}
+
+form > div > div > label {
+    white-space: nowrap;
+}
+
+.modal-icon {
+    margin-bottom: 20px;
+    margin-top: 5px;
+}
+
+form > div > div > label > label {
+    margin-bottom: 0px !important;
+}
+
+#potvrdBigButtCZ {
+    min-width: 88px !important;
+}
+
+@media (min-width: 1200px) {
+    #potvrdBigButtCZ {
+        margin-left: 62%;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+    #potvrdBigButtCZ {
+        margin-left: 60%;
+    }
+}
+
+@media (min-width: 767px) and (max-width: 992px) {
+    #potvrdBigButtCZ {
+        margin-left: 57%;
+    }
+}
+
+@media (max-width: 767px) {
+    #potvrdBigButtCZ {
+        margin-left: 15px;
+    }
+}
+
+#smlouvaKUbytovani > tbody > tr > th {
+    white-space: nowrap !important;
+}
+
+#upravitInformaceOKlientoviForm > div > div > div > label > label {
+    font-weight: 300 !important;
+}
+
+#registraceForm > div > div > div > label > label {
+    font-weight: 300 !important;
+}
+
+#upravitButton {
+    position: static;
+    right: 40px;
+}
+
+.upravit-btn {
+    position: static;
+    right: 40px;
+}
+
+/*@media (max-width: 550px) {
+    #upravitButton {
+    display:none!important;
+    }
+}*/
+
+@media (min-width: 767px) and (max-width: 992px) {
+    #userImage {
+        display: none !important;
+    }
+}
+
+@media (min-width: 767px) and (max-width: 992px) {
+    .user-image-spacer {
+        display: none !important;
+    }
+}
+
+/*#upravitButtonA {
+    float: right;
+}*/
+
+
+@media (min-width:524px) and (max-width:767px) {
+    .upravButtonVedlaNapisu {
+        float: right
+    }
+    .upravNadpisVedlaTlacidla {
+        float:left;
+    }
+}
+
+@media (max-width:480px) {
+    .upravButtonVedlaNapisu {
+        float: none;
+    }
+    .upravNadpisVedlaTlacidla {
+        float: none;
+    }
+}
+/*
+@media (max-width:370px) {
+    #upravitButtonA {
+        margin-top: 75px;
+    }
+}*/
+
+
+
+@media (max-width: 767px) {
+    .upravit-tabulka {
+        margin-top: 70px;
+    }
+}
+
+#tableInformaceOKlientovi {
+    width: 100% !important;
+}
+
+.noborder {
+    border: none !important;
+}
+
+#kontaKlientaBlock {
+    margin-top: 30px;
+}
+
+#NabijeniRow {
+    margin-top: 20px;
+}
+
+@media(max-width:767px) {
+    #clicky {
+        margin-top: 10px;
+        margin-bottom: 25px;
+    }
+}
+
+@media(min-width:768px) {
+    #clicky {
+        margin-top: 20px;
+        margin-bottom: 25px;
+    }
+}
+
+
+#tableKontaKlienta {
+    margin-bottom: 0px !important;
+}
+
+#detailUbytovaniTable > tbody > tr:first-child {
+    border-top: 0 !important;
+}
+
+.souhlas-podminky {
+    max-width: 300px;
+}
+
+.img-table-check {
+    margin-left: 10px;
+}
+
+.center-block-overwrite {
+    display: block !important;
+    margin: 0 auto !important;
+}
+
+#buttNovaZadost {
+    display: block !important;
+    margin: 25px auto 35px auto !important;
+}
+
+.center-table-trick {
+    display: table !important;
+    margin: 0 auto;
+}
+
+#redirZadostToRezervace {
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+#KatalogForm > table > tbody > tr > th {
+    font-size: larger;
+}
+
+.datepicker {
+    background-color: #EFEFEF;
+    border-color: #c9c8c8;
+}
+
+
+.parent {
+    position: absolute;
+    bottom: 0px;
+    height: auto;
+    width: 100%;
+    padding: 10px;
+}
+
+.child {
+    text-align: center;
+}
+
+.container {
+    position: relative;
+}
+
+.well-danger {
+    background: #d99d9f !important;
+    border-color: #c66d6f !important;
+}
+
+#tabZadosti > tbody {
+    float: inherit !important;
+}
+
+.noborderZadosti > tbody > tr > th {
+    border: 0px !important;
+}
+
+.noborderZadosti > tbody > tr > td {
+    border: 0px !important;
+}
+
+#tabZadosti > tbody > tr > th {
+    white-space: nowrap;
+}
+
+@media (min-width: 768px) {
+    #zmenitPouzeDatumButton {
+        margin-left: 27% !important;
+    }
+}
+
+@media (max-width: 767px) {
+    #zmenitPouzeDatumButton {
+        margin-left: 15px !important;
+        float: left;
+    }
+}
+
+
+.th-left-long-td {
+    vertical-align: top !important;
+}
+
+#selPokoj {
+    min-width: 100px;
+}
+
+#zahlaviZadost {
+    padding: 10px;
+    font-size: 20px;
+    border-bottom: 2px solid #ddd;
+    margin: 10px;
+}
+
+#pokojNevybran > div {
+    padding: 5px 10px;
+}
+
+#tabZadosti > div > form > div > div > input {
+    margin-left: 0px !important;
+}
+
+@media (max-width: 767px) {
+    #tabZadosti input[type=checkbox] {
+        margin-left: -12px;
+    }
+    .smlouva div{
+        padding-top: 0;
+    }
+}
+
+.detailUbytovani .form-control-static {
+    padding-top: 0;
+}
+.detailUbytovani .form-group {
+    margin-bottom: 0;
+}
+
+#VolneKapacityForm {
+    margin-bottom: 40px;
+}
+
+.info-text-vypoved {
+}
+
+.info-text-vypoved {
+    margin: 10px 0px;
+}
+
+.vyplnte-dotaznik-text {
+    margin-bottom: 20px;
+}
+
+#vypovedi > fieldset > div > h3 {
+    margin-top: 0px !important;
+}
+/*
+u {
+    text-decoration: none;
+    border-bottom: 3px solid #ddd;
+}*/
+
+#footerallways {
+    background-color: transparent !important;
+    border-color: transparent !important;
+    pointer-events: none;
+}
+
+#footer-levyallways {
+    pointer-events: auto;
+}
+
+@media (max-width: 767px) {
+    .navbar-nav {
+        margin: 0px -15px;
+    }
+}
+
+#tableInformaceOKlientovi > div > div > div > div > label {
+    font-weight: 300 !important;
+}
+
+
+
+/*#upravitButtonCol {
+    float: right;
+}*/
+
+.upravit-btn-col {
+    float: right !important;
+}
+
+#tableKontaKlienta > tbody > tr > td {
+    white-space: nowrap;
+}
+
+#registraceUcet {
+    padding: 0 15px;
+}
+
+.form-control-last-custom {
+    border-top-right-radius: 4px !important;
+    border-bottom-right-radius: 4px !important;
+}
+
+@media (max-width: 767px) {
+    .checkbox-podminek-registrace {
+        float: left !important;
+        margin-right: 15px !important;
+    }
+}
+
+@media (min-width: 768px) {
+    .checkbox-podminek-registrace {
+        float: right !important;
+    }
+}
+
+.popover {
+    color: #fff;
+}
+
+/*.mycontent {
+    display:none;
+}*/
+
+.popover {
+    max-width: 400px;
+}
+
+.popover-content {
+    white-space: nowrap;
+}
+
+/*#innerFooter > div > div > div > table > tbody > tr > td {
+    vertical-align:top!important;
+    background-color: transparent!important;
+}*/
+
+#KontaktOsobaTable > div > div > div > label {
+    font-weight: normal;
+}
+
+#KontaktOsobaTable > div > label {
+    white-space: nowrap;
+}
+
+#upravitButtonKontOs {
+    position: static;
+    right: 40px;
+}
+
+#upravitButtonKontOsA {
+    float: right;
+}
+
+#upravitButtonKontOsCol {
+    float: right !important;
+}
+.vyskaRiadkuKonto div {
+    line-height: 34px;
+}
+.ucet-correction {
+    padding: 0 15px;
+}
+
+.potvrdit-button {
+    margin-top: 15px;
+}
+
+@media (min-width:768px) {
+    .table-collapsing {
+        margin: 37px;
+    }
+}
+
+@media (max-width:767px) {
+    .table-collapsing {
+        margin: 15px;
+    }
+}
+
+.image-potvrzeni {
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+.image-potvrzeni-above {
+    margin-bottom: 40px;
+}
+
+#KatalogForm > div {
+    margin-bottom: -15px;
+    float: inherit;
+}
+
+#informaceInkaso > label {
+    font-weight: normal !important;
+    margin-bottom: 15px;
+}
+
+#informaceUcty > label {
+    font-weight: normal !important;
+    margin-bottom: 15px;
+}
+
+.glyphicon-remove-circle {
+    font-size: 25px;
+    margin-left: 10px;
+}
+
+.glyphicon-ok-circle {
+    font-size: 25px;
+    margin-left: 10px;
+}
+.vypoved-ubytovani-icon {
+    font-size: 20px;
+    color: #997047;
+    padding:0;
+}
+.vypoved-ubytovani-center {
+    text-align: center;
+}
+
+#buttVytvorKS {
+    margin-top: 15px;
+}
+
+.ks-in-use {
+    margin: 20px 0 40px 0;
+    font-weight: bold !important;
+}
+
+
+#tableKlientInfoObjednavky {
+    margin-top: 15px;
+    margin-bottom: 45px;
+}
+
+@media (min-width:768px) {
+    #dpDatumKatalogu > div {
+        float: right;
+    }
+}
+
+/*@media (min-width:768px) {
+    #KatalogForm > div {
+        top: 22%;
+    }
+}*/
+
+@media (max-width:767px) {
+    #dpDatumKatalogu > div {
+        float: left;
+    }
+}
+
+
+
+@media (max-width:767px) {
+    #dpDatumKatalogu {
+        margin-top: 25px;
+    }
+}
+
+@media (min-width:620px) {
+    .label-skola {
+        float: right;
+        font-size: 20px;
+        margin-top: -25px;
+        font-weight: bold;
+        margin-right: -50px;
+        font-family: 'News Cycle', sans-serif;
+    }
+}
+
+@media (max-width:619px) {
+    .label-skola {
+        margin-top: 20px;
+        text-align: center;
+        font-size: x-large;
+        max-height: 80vw;
+    }
+}
+
+.upravitBtn {
+    float: right !important;
+}
+
+@media (min-width:395px) and (max-width:767px) {
+    #upravitButtonKontOsA {
+        margin-top: 75px;
+    }
+}
+
+@media(min-width:371px) and (max-width:394px) {
+    #upravitButtonKontOsA {
+        margin-top: 30px;
+    }
+}
+
+@media (max-width:370px) {
+    #upravitButtonKontOsA {
+        margin-top: 75px;
+    }
+}
+
+/*#upravitButtonCol, col-xs-1 {
+    padding-right: 0px !important;
+}*/
+
+#upravitButtonKontOsCol, col-xs-1 {
+    padding-right: 0px !important;
+}
+
+#tableInformaceOKlientovi > div > div {
+    margin-bottom: 5px !important;
+}
+
+@media(max-width: 767px) {
+    #tableInformaceOKlientovi {
+        margin-left: 10px;
+    }
+    .tableInformaceOKlientoviResponzivita label {
+        margin-bottom: 0;
+    }
+}
+
+@media(min-width:768px) {
+    #KontaktOsobaTable > div {
+        margin-bottom: 0px !important;
+    }
+}
+
+
+#footer-pravy > ul > li > a {
+    margin: 0px;
+}
+
+#footer-pravy > ul > li > div > button {
+    margin: 0px;
+}
+
+#footer-levy > a {
+    margin: 0px;
+}
+
+#tableKontaKlienta > tbody > tr > td {
+    text-align: right;
+}
+
+@media(max-width:406px) {
+    .toggle-button {
+        display: none;
+    }
+}
+
+.well > form > div > div {
+    margin-bottom: 5px !important;
+}
+
+.well > form {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.zpet-na-hlavni {
+    margin-top: 10px;
+}
+
+.alert-margin {
+    margin-top: 20px;
+}
+
+.form-group > label > label {
+    font-weight: 500 !important;
+}
+
+.form-group > label {
+    font-weight: 500 !important;
+}
+
+.form-control-static > label {
+    font-weight: 300 !important;
+}
+
+th {
+    font-weight: 500 !important;
+}
+
+    th > label {
+        font-weight: 500 !important;
+    }
+
+.btn {
+    padding: 8px 14px 6px 14px;
+}
+
+.nav > tbody > tr > td > form > input {
+    margin-top: 6px !important;
+    margin-bottom: 6px !important;
+}
+
+.logo-hlavicky {
+    background-image: url("images/MENU_logo.png");
+    width: 50px;
+    height: 35px;
+    background-repeat: no-repeat;
+}
+
+.language {
+    width: 25px;
+    height: 27px;
+    background-repeat: no-repeat;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+lng-parent {
+    vertical-align: middle;
+}
+
+.lng-text {
+    margin-left: 5px;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.lng-cs {
+    background-image: url("images/cz.png");
+}
+
+.lng-cs-selected {
+    background-image: url("images/cz_selected.png");
+}
+
+.lng-en {
+    background-image: url("images/usa.png");
+}
+
+.lng-en-selected {
+    background-image: url("images/usa_selected.png");
+}
+
+.lng-sk {
+    background-image: url("images/sk.png");
+}
+
+.lng-sk-selected {
+    background-image: url("images/sk_selected.png");
+}
+
+.lng-ru {
+    background-image: url("images/ru.png");
+}
+
+.lng-ru-selected {
+    background-image: url("images/ru_selected.png");
+}
+
+.lng-de {
+    background-image: url("images/de.png");
+}
+
+.lng-de-selected {
+    background-image: url("images/de_selected.png");
+}
+
+@media(min-width: 768px) {
+    .panel-heading {
+        padding: 30px 40px 10px 40px;
+    }
+}
+
+@media(max-width: 767px) {
+    .panel-heading {
+        padding: 25px 30px 20px 30px;
+    }
+}
+
+.column-nabit {
+    width: 120px;
+    text-align: right;
+}
+
+.column-zadost {
+    width: 150px;
+}
+
+
+.column-oko {
+    width: 100px;
+    text-align: center;
+}
+
+.modal-submit {
+    margin-left: 20px;
+}
+
+.modal-form-group-submit {
+    margin-top: 13px;
+    margin-bottom: 5px;
+}
+
+.modal-body-custom {
+    padding: 15px 22px;
+}
+
+@media (min-width:768px) {
+    #submitter {
+        margin-left: -38px;
+    }
+}
+
+.spacer-bottom10 {
+    margin-bottom: 10px;
+}
+
+.spacer-bottom20 {
+    margin-bottom: 20px;
+}
+
+.back-to-index {
+    float: right;
+}
+
+#academicDegree {
+    white-space: nowrap;
+}
+
+#loadingmsg {
+    color: black;
+    background: #fff;
+    padding: 10px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 100;
+    width: 300px;
+    height: 120px;
+    margin-left: -150px;
+    margin-top: -60px;
+}
+
+#loadingover {
+    background: black;
+    z-index: 99;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+    filter: alpha(opacity=80);
+    -moz-opacity: 0.8;
+    -khtml-opacity: 0.8;
+    opacity: 0.8;
+}
+
+
+.upravit-btn-a {
+    float: right;
+}
+
+@media (max-width: 767px) {
+/*    .upravit-btn-a {
+        margin-top: 25px;
+    }*/
+
+    .upravit-btn-col {
+        left: 34px;
+        position: absolute;
+    }
+
+    .upravit-btn {
+        float: left;
+    }
+}
+
+.radio {
+    margin-left: 15px;
+}
+
+#NovaZavadaTable > div > label {
+    white-space: normal;
+}
+
+#volbyJidel {
+    min-height: 290px;
+    padding-top: 25px;
+}
+
+#JidloKalendar {
+    margin-right: 15px;
+}
+
+#KatalogObjednavekForm {
+    margin-left: 20px;
+}
+
+/*#KatalogForm > div > form {
+    max-width: 250px;
+}*/
+@media(min-width: 768px) {
+    #KatalogForm > div > form {
+        max-height: 46px;
+    }
+}
+
+#KatalogForm {
+    margin: 12px 20px 50px 20px;
+}
+
+@media(max-width: 767px) {
+    #KatalogForm {
+        margin: 30px 20px 50px 20px;
+    }
+}
+
+#KatalogForm > div > form > label {
+    text-align: left;
+}
+
+.number-picker {
+    max-width: 44px;
+    height: 36px;
+    text-align: center;
+}
+
+.form-inline > div {
+    margin-right: 15px;
+}
+
+.content-sm {
+    margin: 30px;
+}
+
+@media(max-width: 991px) {
+    #CheckAvail {
+        float: left;
+    }
+}
+
+@media(min-width: 992px) {
+    #CheckAvail {
+        float: right;
+    }
+}
+
+@media (min-width:992px) and (max-width:1199px) {
+    #datepickerFrom {
+        max-width: 150px;
+    }
+
+    #datepickerTo {
+        max-width: 150px;
+    }
+}
+
+@media (min-width:768px) and (max-width:991px) {
+    #datepickerFrom {
+        max-width: 142px;
+    }
+
+    #datepickerTo {
+        max-width: 142px;
+    }
+
+    #CheckAvail {
+        margin-top: 15px;
+    }
+
+        #CheckAvail > input {
+            width: 170px;
+        }
+}
+
+
+/*#HlavickaDostupnosti:first-child > div {
+    float:right;
+}*/
+
+/*#HlavickaDostupnosti:last-child {
+    width: 120px;
+}*/
+
+#HlavickaDostupnosti > div {
+    width: intrinsic; /* Safari/WebKit uses a non-standard name */
+    width: -moz-max-content; /* Firefox/Gecko */
+    width: -webkit-max-content; /* Chrome */
+    float: right;
+}
+
+    #HlavickaDostupnosti > div > div {
+        display: inline-block;
+    }
+
+        #HlavickaDostupnosti > div > div > div {
+            text-align: right;
+            margin-right: 5px;
+            font-weight: 300;
+        }
+
+#HlavickaOdhlaseni {
+    width: 100px;
+}
+
+#LoginPanel {
+    margin: 40px 20px 20px 20px;
+}
+
+    #LoginPanel + div {
+        margin-top: 20px;
+    }
+
+/*.nabidka-pokoj {
+    margin: 24px 5px;
+}*/
+
+.nabidka-well {
+    margin-top: 15px;
+}
+
+.nazev-pokoje {
+    text-transform: uppercase;
+    font-size: 22px;
+}
+
+    .nazev-pokoje > div {
+        margin-left: 10px;
+    }
+
+.nabidka-nazev {
+    text-transform: uppercase;
+    font-size: 20px;
+}
+
+.nabidka-spacing {
+    margin-bottom: 10px;
+}
+
+.nabidka-popis {
+    font-weight: 300;
+}
+
+.nabidka-castka {
+    font-weight: 400;
+    font-size: 30px;
+    text-align: center;
+    margin-left: 5px;
+    margin-top: 5px;
+    margin-bottom: 20px;
+}
+
+.nabidka-counter {
+    width: 130px;
+}
+
+.nabidka-spacing > ul {
+    padding-left: 15px;
+    font-weight: 300;
+}
+
+.pokoj-popis {
+    font-weight: 300;
+}
+
+    .pokoj-popis > div {
+        margin-left: 10px;
+    }
+
+.pokoj-specifikace > ul {
+    padding-left: 15px;
+    font-weight: 300;
+}
+
+.nabidka-castka > div {
+    display: inline;
+}
+
+.sekce-kapacity {
+    margin-top: 20px;
+    padding: 0px !important;
+}
+
+#SumPanel {
+    position: absolute;
+    right: -300px;
+    margin-top: 40px;
+    transition: 0.01s;
+}
+
+.sticky-panel-content {
+    margin: 20px;
+}
+
+#Step2Buttons {
+    margin-right: 20px;
+    margin-left: 20px;
+    padding: 0 !important;
+}
+
+/*NA TENHLE USEK BACHA A RADEJI JESTE PREDELAT!*/
+
+/*.pokoj-galerie {
+    padding-right: 0px;
+}
+
+.pokoj-desc {
+    margin-left: 20px;
+}
+
+.pokoj-podrobnosti {
+    margin-right:-20px;
+}*/
+
+/*PO SEM*/
+
+.validation-summary-errors > ul {
+    margin-bottom: 0px;
+    padding-left: 10px;
+}
+
+    .validation-summary-errors > ul li {
+        list-style-type: none;
+    }
+
+#error-messages-capacity {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+
+
+@media(max-width: 767px) {
+    .pokoj-postele {
+        margin-left: 11px;
+        margin-bottom: 15px;
+    }
+}
+
+@media(max-width: 767px) {
+    .nazev-pokoje {
+        margin-bottom: 15px;
+    }
+}
+
+@media(max-width: 767px) {
+    .pokoj-galerie {
+        margin-bottom: 20px;
+    }
+}
+
+@media(max-width: 767px) {
+    .pokoj-popis {
+        margin-bottom: 20px;
+    }
+}
+
+/*.sidebar-box {
+  max-height: 120px;
+  position: relative;
+  overflow: hidden;
+}
+.sidebar-box .read-more { 
+  position: absolute; 
+  bottom: 0; 
+  left: 0;
+  width: 100%; 
+  text-align: center; 
+  margin: 0; 
+  padding: 30px 0 0px 0; 
+  background-image: linear-gradient(to bottom, transparent, #F2EEED);
+}*/
+
+/*#info + .readmore-js-toggle { padding-bottom: 1.5em; border-bottom: 1px solid #999; font-weight: bold;}*/
+/*.offer-collapse { 
+    padding: 0 10%; 
+}
+.offer-collapse-container {
+    margin: 0 auto; 
+    max-width: 80px;
+}*/
+
+.luzka {
+    margin-right: 5px;
+    margin-bottom: 13px;
+    margin-top: 10px;
+}
+
+.pristylky {
+    margin-right: 5px;
+}
+
+.hlavicka-kapacity {
+    margin-bottom: 10px;
+}
+
+.dynamic-height-wrap {
+    overflow: hidden;
+    position: relative;
+    transition: max-height 0.25s ease-in-out;
+    width: 100%;
+}
+
+/* Bottom gradient (optional, but recommended)*/
+
+
+.dynamic-height-active .dynamic-show-more {
+    display: inline-block;
+}
+
+.dynamic-show-more {
+    display: none;
+}
+
+.sipka-show-more-less {
+    text-align: center;
+    margin-top: 8px;
+    margin-bottom: 15px;
+    z-index: 1;
+    font-weight: 300;
+}
+
+#tableKartyKredit {
+    margin-top: 20px;
+}
+
+.znacky-karet {
+    display: inline-block;
+    margin-right: 3px;
+    margin-bottom: 3px;
+}
+
+    .znacky-karet > img {
+        width: 50px;
+    }
+
+.znacka-vetsi > img {
+    width: 60px;
+}
+
+#KontaktniFormularBooking > div > div {
+    margin-right: 0px !important;
+    margin-left: 0px !important;
+}
+
+/*.img-checkbox {
+    display: none;
+}
+
+.img-checkbox + label {
+    background: #999;
+    height: 16px;
+    width: 16px;
+    display: inline-block;
+    padding: 0 0 0 0px;
+}
+
+.img-checkbox:checked + label {
+    background: #0080FF;
+    height: 16px;
+    width: 16px;
+    display: inline-block;
+    padding: 0 0 0 0px;
+}*/
+
+
+.trigging {
+    display: none;
+}
+
+.checker {
+    background-image: url("images/sluzba1_unchecked.png");
+    background-position: left center;
+    background-size: auto 100%;
+    width: 70px;
+    height: 70px;
+    background-repeat: no-repeat;
+}
+
+#trigger:checked + .checker {
+    background-image: url("images/sluzba1_checked.png");
+}
+
+#trigger1:checked + .checker {
+    background-image: url("images/sluzba1_checked.png");
+}
+
+#trigger2:checked + .checker {
+    background-image: url("images/sluzba1_checked.png");
+}
+
+#trigger3:checked + .checker {
+    background-image: url("images/sluzba1_checked.png");
+}
+
+.nazev-sluzby {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+#DalsiSluzby > div > div > div {
+    text-align: center;
+}
+
+.cursorpointer {
+    cursor: pointer;
+}
+
+.cursorhand {
+    cursor: grabbing;
+}
+
+
+.cara-vpravo {
+    border-right-style: solid;
+    border-right-width: 2px;
+    border-bottom-style: none;
+}
+
+/* pro úzké zobrazení bude čára vlastně dole, protože obě sekce jsou nad sebou */
+@media(max-width: 767px) {
+    .cara-vpravo {
+        border-bottom-style: solid;
+        border-bottom-width: 2px;
+        border-right-style: none;
+    }
+}
+
+.cara-pred {
+    border-left-style: solid;
+    border-left-width: 2px;
+    border-top-style: none;
+}
+
+@media(max-width: 767px) {
+    .cara-pred {
+        border-top-style: solid;
+        border-top-width: 2px;
+        border-left-style: none;
+    }
+}
+
+
+.text-inactive {
+    color: #777;
+}
+/* Okraje k doladění vzhledu */
+
+.mt-15 {
+    margin-top: 15px;
+}
+
+.mb-15 {
+    margin-bottom: 15px;
+}
+
+.mt-30 {
+    margin-top: 30px;
+}
+
+
+.mb-30 {
+    margin-bottom: 30px;
+}
+
+/* nový vzhled objednávek jídel (po týdnech) */
+.tydennikalendar .bootstrap-datetimepicker-widget .datepicker-days table tbody tr:hover {
+    background-color: #aaa;
+}
+
+.inline {
+    display: inline;
+}
+
+.pocetobjednanych {
+    display: inline-block;
+    opacity: 0.3;
+    width: 1em;
+    text-align: center;
+}
+
+.objednano .pocetobjednanych {
+    opacity: 1;
+}
+
+.btn-circle {
+    color: #333;
+    border-radius: 20px;
+    border: #ebe4e3;
+    line-height: 1.5;
+    padding: 4px 10px;
+    vertical-align: central;
+}
+
+    .btn-circle[disabled] {
+        opacity: 0.3;
+    }
+
+.no-gutters {
+    padding-right: 0px;
+    padding-left: 0px;
+}
+
+.objednavkyStravovani .row {
+    margin-bottom: 5px;
+}
+
+    .objednavkyStravovani .row.objednano .produkt {
+        font-weight: 700;
+    }
+
+.objednavkyStravovani .produkt {
+    padding-left: 30px;
+}
+
+.objednavkyStravovani .den.minulost {
+    color: lightgray;
+}
+
+.input-lg {
+    max-width: 100%;
+}
+
+.minulost .jineobjednavky a {
+    color: lightgray;
+}
+
+.jineobjednavky {
+    text-align: center;
+    font-size: smaller;
+}
+
+div#katalogJidel {
+    margin-top: -50px;
+    /* částečně překryji přes předchozí, čímž to opticky spojím do jednoho bloku */
+}
+
+.katalogJidelUpozorneni {
+    margin: 10px auto;
+    text-align: center;
+}
+
+/* ALL LOADERS */
+
+.loader {
+    width: 28px;
+    height: 28px;
+    border-radius: 100%;
+    position: absolute;
+    margin-top: 10px;
+    margin-left: -19px;
+}
+
+/* LOADER 1 */
+
+#loader-1:before, #loader-1:after {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+    border: 10px solid transparent;
+    border-top-color: #3498db;
+}
+
+#loader-1:before {
+    z-index: 100;
+    animation: spin 1s infinite;
+}
+
+#loader-1:after {
+    border: 10px solid #ccc;
+}
+
+@keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+#cal-day-box .day-highlight.dh-event-noshow {
+    border: none;
+}
+
+.modal-content {
+    margin-bottom: 70px; /* aby konec dialogu nezajížděl pod spodní panel, nebo šel alespoň vyskrolovat zpod něj */
+}
+
+/* Stav prádelen */
+.row.pracka div {
+    border: solid 1px black;
+    margin-right: -1px;
+    margin-bottom: -1px;
+}
+
+.row.Volna div {
+    background: lightgreen;
+}
+
+.row.Pracuje div {
+    background: orange;
+}
+
+.row.Offline div {
+    background: red;
+}
+
+.row.MimoProvoz div {
+    background: gray;
+}
+
+h3.nazevpradelny {
+    text-align: center;
+}
+
+/* vkládání fotek do závad */
+label[for="vlozitprilohu"] {
+    cursor: pointer;
+    text-decoration: underline;
+    color: blue;
+}
+label[for="vlozitprilohu"].modalzavada {
+        text-decoration: none;
+        color: white;
+        font-weight: normal;
+    }
+/* vkládání fotek do závad */
+button[for="vlozitprilohu"] {
+    cursor: pointer;
+}
+
+img.fotozavady {
+    width: 100%;
+    max-width: 400px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+/* ------------------------------------- */
+/*             Hodnocení jídel           */
+/* ------------------------------------- */
+
+
+/*             RateIT - hvezdičky v hodnocení jídel              */
+div.iskamstars div.rateit-selected {
+    color: rgb(239, 197, 41);
+}
+
+.nadpis-hodnoceni {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+/*@media(max-width: 767px) {
+    .nadpis-hodnoceni {
+        visibility:collapse;
+    }*/
+
+@media(min-width: 767px) {
+    .modal-dialog.hodnoceni {
+        width: 80%;
+    }
+}
+
+.row.hodnoceni {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: #777;
+}
+
+/* For small screen */
+.hodnoceni:nth-of-type(odd) {
+    background-color: #f5f2f1;
+    /* background-color: #efefef;*/
+    border-top: 1px solid #dddddd;
+}
+
+div.radioline * {
+    cursor: pointer;
+}
+
+.popisspoznamkou {
+    cursor: pointer;
+    text-decoration: underline;
+    text-decoration-style: dotted;
+    text-decoration-color: gray;
+}
+
+tr.invalid {
+    font-weight: 100;
+}
+
+tr.valid {
+    font-weight: 600;
+}
+
+tr.pohledavka-poznamka {
+    display: none;
+}
+
+/* ------------------------------------- */
+/*             Dimenso               */
+
+.dimensoAutentifikaceKod {
+    font-size: 40px;
+    padding: 5px 10px 5px 13px;
+    display: inline-block;
+    background: aliceblue;
+    border-radius: 5px;
+    width: auto;
+    letter-spacing:2px;
+    font-family: monospace;
+    font-weight: 500;
+    border: 2px solid #997047;
+}
+
+.dimensoAutentifikaceKod .first-three {
+    margin-right: 10px; 
+}
+.dimensoAktivaceText {
+    background: lightgreen;
+    padding:10px;
+}
+
+.dimensoOdpocet {
+    display: inline-block; 
+    min-width: 30px;
+    text-align: center; 
+}
+.dimensoKodNadpis {
+    font-size: 16px;
+}
+
+.mt-5 {
+    margin-top: 5px;
+}
+
+/* pro zobrazeni poznamky u pohledavky na druhem radku pridat do custom nasledujici*/
+/*tr.pohledavka-poznamka {
+    display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+}*/
