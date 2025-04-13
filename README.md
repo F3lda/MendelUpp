@@ -1,4 +1,4 @@
-# MendelUpp
+# PeasUpp (MendelUpp)
 
 Mendelu Unofficial Student App
 

@@ -49,7 +49,7 @@ class _MyAppState extends State<MyApp> {
           useMaterial3: true,
         ), // standard dark theme
         themeMode: change.themeMode, // app theme controls
-        home: const HomePage(title: 'MendelUpp'),
+        home: const HomePage(title: 'PeasUpp'),
         debugShowCheckedModeBanner: false,
       )
     );
