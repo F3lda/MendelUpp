@@ -138,7 +138,7 @@ class _WebViewLoginPageState extends State<WebViewLoginPage> {
                   await storage.write(key: "Mpassword", value: dataPassword);
 
                   if (mounted) {
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Prihlasen: $dataLoggedin")));
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Logged in as: $dataLoggedin")));
                     Navigator.of(context).pop();
                   }
                 } else {
@@ -193,7 +193,7 @@ class _WebViewLoginPageState extends State<WebViewLoginPage> {
       await storage.write(key: "Musername", value: dataUsername);
       await storage.write(key: "Mpassword", value: dataPassword);
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Prihlasen: $dataUsername")));
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Logged in as: $dataUsername")));
         Navigator.of(context).pop();
       }
     }

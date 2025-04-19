@@ -39,7 +39,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return  Consumer<AppThemeChangeNotify>(
       builder: (context, change, child) => MaterialApp(
-        title: 'MendelUpp',
+        title: 'PeasUpp',
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF7abf17)),
           useMaterial3: true,

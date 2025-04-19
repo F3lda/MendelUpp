@@ -70,7 +70,8 @@ class _MenuState2 extends State<MainPopupMenu> {
         ),*/
         PopupMenuItem<_MenuOptions>(
           value: _MenuOptions.loginLogout,
-          child: (widget.loggedInUsername == '') ? const Text('Přihlásit se') : const Text('Odhlásit se'),
+          //child: (widget.loggedInUsername == '') ? const Text('Přihlásit se') : const Text('Odhlásit se'),
+          child: (widget.loggedInUsername == '') ? const Text('Log in') : const Text('Log out'),
         ),
       ],
     );

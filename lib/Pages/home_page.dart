@@ -58,7 +58,8 @@ class _HomePageState extends State<HomePage> {
 
             Center(child: Padding(padding: const EdgeInsets.symmetric(vertical:15, horizontal: 10), child:
               Text(
-                (loggedInUsername != "") ? '$loggedInUsername, vítejte!' : 'Vítejte!\nPřihlašte se do aplikace.', textAlign: TextAlign.center,
+                (loggedInUsername != "") ? '$loggedInUsername, welcome!' : 'Welcome!\nLog in to the app.', textAlign: TextAlign.center,
+                //(loggedInUsername != "") ? '$loggedInUsername, vítejte!' : 'Vítejte!\nPřihlašte se do aplikace.', textAlign: TextAlign.center,
                 style: const TextStyle(
                   //color: Colors.white,
                   fontSize: 34.0,
