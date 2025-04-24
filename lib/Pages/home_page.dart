@@ -56,9 +56,9 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
 
-            Center(child: Padding(padding: const EdgeInsets.symmetric(vertical:15, horizontal: 10), child:
+            Center(child: Padding(padding: const EdgeInsets.symmetric(vertical:15, horizontal: 10), child: Column(children: [
               Text(
-                (loggedInUsername != "") ? '$loggedInUsername, welcome!' : 'Welcome!\nLog in to the app.', textAlign: TextAlign.center,
+                (loggedInUsername != "") ? '$loggedInUsername, welcome!' : 'Welcome!', textAlign: TextAlign.center,
                 //(loggedInUsername != "") ? '$loggedInUsername, vítejte!' : 'Vítejte!\nPřihlašte se do aplikace.', textAlign: TextAlign.center,
                 style: const TextStyle(
                   //color: Colors.white,
@@ -66,9 +66,19 @@ class _HomePageState extends State<HomePage> {
                   fontWeight: FontWeight.bold
                 ),
               ),
+              if (loggedInUsername == "") Text(
+                'Log in to the app to access the Student Portal and the Menza.', textAlign: TextAlign.center,
+                //(loggedInUsername != "") ? '$loggedInUsername, vítejte!' : 'Vítejte!\nPřihlašte se do aplikace.', textAlign: TextAlign.center,
+                style: const TextStyle(
+                  //color: Colors.white,
+                    fontSize: 26.0,
+                    fontWeight: FontWeight.bold
+                ),
+              ),
+            ]),
             ),),
 
-            CardButton(
+            if (loggedInUsername != "") CardButton(
               color: null,
               image: const AssetImage("assets/images/StudentPortal.png"),
               text: "Student Portal", onTap: () {
@@ -87,7 +97,7 @@ class _HomePageState extends State<HomePage> {
               }
             ),
 
-            CardButton(
+            if (loggedInUsername != "") CardButton(
               color: null,
               image: const AssetImage("assets/images/menza.jpg"),
               text: "Menza - ISKAM", onTap: () {

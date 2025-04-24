@@ -8,6 +8,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:path/path.dart' as p;
 
+import '../Common/utils.dart';
 import '../WebView/webview_popscope.dart';
 
 
@@ -84,12 +85,6 @@ class _WebViewGuestStudent extends State<WebViewGuestStudent> {
       );
 
     loadHtmlFromAssets('assets/webviews_guest/rozvrh.html', controller);
-  }
-
-
-  Future<void> loadHtmlFromAssets(String filename, WebViewController controller) async {
-    String htmlText = await rootBundle.loadString(filename);
-    controller.loadRequest(Uri.dataFromString(htmlText, mimeType: 'text/html', encoding: Encoding.getByName('utf-8')));
   }
 
   @override

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
+import '../Common/utils.dart';
+
 
 class WebViewLoginPage extends StatefulWidget {
   const WebViewLoginPage({super.key});
@@ -61,8 +63,23 @@ class _WebViewLoginPageState extends State<WebViewLoginPage> {
             if (webviewError) {return;}
 
             if (webviewState != LOGIN.DONE) {
-
-              if (url.toLowerCase().contains('https://is.mendelu.cz/system/login.pl'.toLowerCase()) && webviewState == LOGIN.PAGE) {
+              if (url.startsWith('data:text/html;'.toLowerCase()) && webviewState == LOGIN.PAGE) {
+                final result = (await controller.runJavaScriptReturningResult(
+                    "if (typeof SHOWWEBVIEWtoFlutter !== 'undefined' && typeof USERNAMEtoFlutter !== 'undefined' && typeof PASSWORDtoFlutter !== 'undefined'){"
+                        "window.onbeforeunload = function (e) {USERNAMEtoFlutter.postMessage(document.getElementById('credential_0').value); PASSWORDtoFlutter.postMessage(document.getElementById('credential_1').value);};"
+                        "setTimeout(function() {SHOWWEBVIEWtoFlutter.postMessage('SHOW');}, 330);"
+                        "true;"
+                    "} else {false;}"
+                )).toString();
+                print("RESULT form offline");
+                print(result);
+                if (result != "true") {
+                  if (mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("ERROR form offline.")));
+                    Navigator.of(context).pop();
+                  }
+                }
+              } else if (url.toLowerCase().contains('https://is.mendelu.cz/system/login.pl'.toLowerCase()) && webviewState == LOGIN.PAGE) {
                 final result = (await controller.runJavaScriptReturningResult(
                     "if (typeof SHOWWEBVIEWtoFlutter !== 'undefined' && typeof USERNAMEtoFlutter !== 'undefined' && typeof PASSWORDtoFlutter !== 'undefined'){"
                         "window.onbeforeunload = function (e) {USERNAMEtoFlutter.postMessage(document.getElementById('credential_0').value); PASSWORDtoFlutter.postMessage(document.getElementById('credential_1').value);};"
@@ -181,7 +198,8 @@ class _WebViewLoginPageState extends State<WebViewLoginPage> {
           await _checkGuestLogin();
         },
       );
-    controller.loadRequest(Uri.parse('https://is.mendelu.cz/system/login.pl'));
+    //controller.loadRequest(Uri.parse('https://is.mendelu.cz/system/login.pl'));
+    loadHtmlFromAssets('assets/webviews_guest/login.html', controller);
   }
 
   Future<void> _checkGuestLogin() async {
