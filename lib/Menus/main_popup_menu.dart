@@ -1,9 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:mendelupp/Services/theme_service.dart';
 
 import 'package:provider/provider.dart';
-import '../../Common/change_notifiers.dart';
+import '../ChangeNotifiers/change_notifiers.dart';
 
 
 import '../WebViewLogin/webview_login_page.dart';
@@ -34,7 +35,9 @@ class _MenuState2 extends State<MainPopupMenu> {
       onSelected: (value) async {
         switch (value) {
           case _MenuOptions.themeMode:
-            context.read<AppThemeChangeNotify>().toggleTheme(context);
+            context.themeService.toggleTheme(context);
+            //context.read<AppThemeChangeNotify>().toggleTheme(context);
+            //context.themeNotifier.toggleTheme(context);
             break;
 
           case _MenuOptions.languageSwitch:
@@ -60,9 +63,11 @@ class _MenuState2 extends State<MainPopupMenu> {
         }
       },
       itemBuilder: (context) => [
-        const PopupMenuItem<_MenuOptions>(
+        PopupMenuItem<_MenuOptions>(
           value: _MenuOptions.themeMode,
-          child: Text('Light/Dark mode'),
+          child: Text('Toggle Theme [${context.themeService.getCurrentThemeName(context)}] '), // space at the end because of right padding
+          //child: Text('Toggle Theme [${context.read<AppThemeChangeNotify>().getCurrentThemeName(context)}] '), // space at the end because of right padding
+          //child: Text('Toggle Theme'),
         ),
         /*const PopupMenuItem<_MenuOptions>(
           value: _MenuOptions.languageSwitch,

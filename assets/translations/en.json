@@ -1,0 +1,21 @@
+{
+  "app": {
+    "title": "My App"
+  },
+  "welcome": {
+    "message": "Welcome to our application!"
+  },
+  "user": {
+    "greeting": "Hello, {name}!"
+  },
+  "items": {
+    "count": {
+      "zero": "No items",
+      "one": "One item",
+      "other": "{count} items"
+    }
+  },
+  "direct": {
+    "access": "This uses direct service access"
+  }
+}

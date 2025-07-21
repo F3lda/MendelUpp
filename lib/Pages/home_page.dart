@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:mendelupp/Libs/app_localizations.dart';
 
 import 'package:mendelupp/WebViewRequest/webview_open_map.dart';
 import 'package:mendelupp/WebViewRequest/webview_open_menza.dart';
 import 'package:mendelupp/WebViewRequest/webview_open_student.dart';
+import 'package:mendelupp/Services/localization_service.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'package:mendelupp/Menus/main_popup_menu.dart';
@@ -48,7 +50,9 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
+        //title: Text(widget.title),
+        //title: Text('app.title'.tr(context)),
+        title: Text(context.localizationService.translate('app.title')),
         actions: <Widget>[MainPopupMenu(onLoginStateChange: onLoggedIn, loggedInUsername: loggedInUsername)]
       ),
       body: SingleChildScrollView(child: Center(
