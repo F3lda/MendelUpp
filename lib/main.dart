@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:mendelupp/Services/app_config_service.dart';
+import 'package:mendelupp/Services/config_service.dart';
 import 'Libs/main_services_provider.dart';
 import 'Pages/home_page.dart';
 import 'ChangeNotifiers/app_theme_change_notify.dart';
@@ -9,7 +9,6 @@ import 'package:provider/provider.dart';
 import 'package:flutter/foundation.dart';
 
 import 'Services/analytics_service .dart';
-import 'Services/config_service.dart';
 import 'Services/localization_service.dart';
 import 'Services/notification_service.dart';
 import 'Services/theme_service.dart';
@@ -55,7 +54,7 @@ class _MyAppState extends State<MyApp> {
       services: [ // Register all your app startup services
         LocalizationService(),
         ThemeService(),
-        AppConfigService() // TODO use (colors, assets URIs, URLS, constants...)
+        ConfigService() // TODO use (colors, assets URIs, URLS, constants...)
       ],
       child: Builder(
         builder: (context) {
