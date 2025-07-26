@@ -49,7 +49,28 @@ class AppThemeChangeNotify with ChangeNotifier {
 
 // Main extension for accessing services and data
 extension ChangeNotifiersExtension on BuildContext {
-  // Service getters with intuitive names
   AppThemeChangeNotify get themeNotifier => read<AppThemeChangeNotify>(); //import 'package:provider/provider.dart'; // Add this import
-  //context.read<AppThemeChangeNotify>().toggleTheme(context);
+  // allows usage:
+  // context.read<AppThemeChangeNotify>().toggleTheme(context);
+  // context.themeNotifier.toggleTheme(context);
+  // context.read<AppThemeChangeNotify>().getCurrentThemeName(context);
+  /*
+    return Consumer<AppThemeChangeNotify>(
+      builder: (context, themeChanged, child) {
+        return Text('Current theme: ${themeChanged.getCurrentThemeName(context)}');
+      },
+    );
+
+    return Consumer<AppThemeChangeNotify>(
+      builder: (context, themeChanged, child) => Stack(
+        children: [
+          // Use SomeExpensiveWidget here, without rebuilding every time.
+          if (child != null) child,
+          Text('Current theme: ${themeChanged.getCurrentThemeName(context)}'),
+        ],
+      ),
+      // Build the expensive widget here.
+      child: const SomeExpensiveWidget(),
+    );
+  */
 }

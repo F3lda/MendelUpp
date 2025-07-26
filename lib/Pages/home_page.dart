@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:mendelupp/Libs/app_localizations.dart';
 
 import 'package:mendelupp/WebViewRequest/webview_open_map.dart';
 import 'package:mendelupp/WebViewRequest/webview_open_menza.dart';

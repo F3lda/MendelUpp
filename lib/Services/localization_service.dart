@@ -9,11 +9,6 @@ import '../Libs/main_services_provider.dart';
 
 class LocalizationService extends AppStartupService {
 
-  //static LocalizationService? _instance;
-  //static LocalizationService get instance => _instance ??= LocalizationService._();
-
-  //LocalizationService._();
-
   @override
   String get serviceName => 'LocalizationService';
 
@@ -457,35 +452,21 @@ class LocalizationService extends AppStartupService {
   }
 }
 
-
 // Main extension for accessing services and data
 extension MainServicesExtension on BuildContext {
   // Service getters with intuitive names
-  LocalizationService get localizationService => getService<LocalizationService>();
+  LocalizationService get localizationService => getService<LocalizationService>(); // allows usage: context.localizationService.translate('app.title')
+
+  String tr(String key, {Map<String, dynamic>? params}) { // allows usage: context.tr('app.title')
+    return localizationService.translate(key, params: params);
+  }
+
+  String trPlural(String key, num count, {Map<String, dynamic>? params}) {
+    return localizationService.translatePlural(key, count, params: params);
+  }
 }
 
 
-/*extension StringTranslation on String {
-  /// Basic translation using context-based service injection
-  String tr(BuildContext context, {Map<String, dynamic>? params}) {
-    return context.localizationService.translate(this, params: params);
-  }
-
-  /// Plural translation using context-based service injection
-  String trPlural(BuildContext context, num count, {Map<String, dynamic>? params}) {
-    return context.localizationService.translatePlural(this, count, params: params);
-  }
-}*/
-/*
-// lib/extensions/context_extensions.dart
-import 'package:flutter/material.dart';
-import '../services/localization_service.dart';
-
-// Your existing service extension - make sure this is properly implemented
-extension MainServicesExtension on BuildContext {
-  // This should connect to your actual service locator
-  LocalizationService get localizationService => getService<LocalizationService>();
-}*/
 
 // lib/utils/service_based_app_localizations.dart
 
@@ -506,7 +487,7 @@ class ServiceBasedAppLocalizationsDelegate extends LocalizationsDelegate<AppLoca
   Future<AppLocalizations> load(Locale locale) async {
     await _changeLocale(locale);
     //await context.localizationService.changeLocale(locale);
-    return AppLocalizations();
+    return AppLocalizations(); // allows usage: Localizations.of(context, AppLocalizations).tr('app.title')
   }
 
   @override
@@ -514,17 +495,17 @@ class ServiceBasedAppLocalizationsDelegate extends LocalizationsDelegate<AppLoca
 }
 
 class AppLocalizations {
-  static AppLocalizations of(BuildContext context) {
+  /*static AppLocalizations of(BuildContext context) { // allows usage: AppLocalizations.of(context).tr('app.title')
     return Localizations.of<AppLocalizations>(context, AppLocalizations)!;
   }
 
-  /// Basic translation using context service
+  // Basic translation using context service
   String tr(BuildContext context, String key, {Map<String, dynamic>? params}) {
     return context.localizationService.translate(key, params: params);
   }
 
-  /// Plural translation using context service
+  // Plural translation using context service
   String trPlural(BuildContext context, String key, num count, {Map<String, dynamic>? params}) {
     return context.localizationService.translatePlural(key, count, params: params);
-  }
+  }*/
 }

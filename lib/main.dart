@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'Libs/app_localizations.dart';
 import 'Libs/main_services_provider.dart';
 import 'Pages/home_page.dart';
-import 'ChangeNotifiers/change_notifiers.dart';
+import 'ChangeNotifiers/app_theme_change_notify.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/foundation.dart';
 
@@ -31,7 +30,7 @@ import 'Services/user_service.dart';
 void main() {
   runApp(MultiProvider(
     providers: [
-      ChangeNotifierProvider<AppThemeChangeNotify>(create: (context) => AppThemeChangeNotify()),
+      //ChangeNotifierProvider<AppThemeChangeNotify>(create: (context) => AppThemeChangeNotify()),
     ],
     child: const MyApp(),
   ),);
@@ -49,8 +48,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MainWidgetServicesProvider(
-      // Register all your app startup services
-      services: [
+      services: [ // Register all your app startup services
         //LocaleService(),
         //ConfigService(), // TODO use (colors, assets URIs, URLS, constants...)
         //UserService(),
@@ -67,7 +65,10 @@ class _MyAppState extends State<MyApp> {
 
             return MaterialApp(
               //title: 'PeasUpp',
-              title: context.localizationService.translate('app.title'),
+              title: context.tr('app.title'),
+              //title: AppLocalizations.of(context).tr('app.title'),
+              //title: Localizations.of(context, AppLocalizations).tr('app.title'),
+              //title: context.localizationService.translate('app.title'),
               theme: ThemeData(
                 colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF7abf17)),
                 useMaterial3: true,
@@ -100,26 +101,9 @@ class _MyAppState extends State<MyApp> {
 
           }
 
-          /*return MaterialApp(
-            title: context.getData<String>('app_name') ?? 'Flutter App',
-            locale: context.currentLocale,
-            supportedLocales: context.supportedLocales,
-            localizationsDelegates: [
-              AppLocalizations.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
-            // Use theme from config
-            themeMode: context.themeService.themeMode,
-            home: const HomePage(title: 'PeasUpp'),
-          );*/
-
-
           return MaterialApp(
             //title: 'PeasUpp',
             title: context.localizationService.translate('app.title'),
-            //title: 'app.title'.tr(context),
             locale: context.localizationService.currentLocale,
             supportedLocales: context.localizationService.supportedLocales,
             localizationsDelegates: [ // flutter pub add flutter_localizations --sdk=flutter // assets folder must be added in pubspec.yml
