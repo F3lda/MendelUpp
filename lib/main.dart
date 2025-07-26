@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:mendelupp/Services/app_config_service.dart';
 import 'Libs/main_services_provider.dart';
 import 'Pages/home_page.dart';
 import 'ChangeNotifiers/app_theme_change_notify.dart';
@@ -28,12 +29,15 @@ import 'Services/user_service.dart';
 
 
 void main() {
-  runApp(MultiProvider(
-    providers: [
-      //ChangeNotifierProvider<AppThemeChangeNotify>(create: (context) => AppThemeChangeNotify()),
-    ],
-    child: const MyApp(),
-  ),);
+  runApp(
+    /*MultiProvider(
+      providers: [
+        //ChangeNotifierProvider<AppThemeChangeNotify>(create: (context) => AppThemeChangeNotify()),
+      ],
+      child: const MyApp(),
+    )*/
+    const MyApp()
+  );
 }
 
 class MyApp extends StatefulWidget {
@@ -49,14 +53,9 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MainWidgetServicesProvider(
       services: [ // Register all your app startup services
-        //LocaleService(),
-        //ConfigService(), // TODO use (colors, assets URIs, URLS, constants...)
-        //UserService(),
-        //AnalyticsService(),
-        //NotificationService(),
-
         LocalizationService(),
         ThemeService(),
+        AppConfigService() // TODO use (colors, assets URIs, URLS, constants...)
       ],
       child: Builder(
         builder: (context) {
@@ -64,11 +63,7 @@ class _MyAppState extends State<MyApp> {
           if (!context.isAppInitialized) {
 
             return MaterialApp(
-              //title: 'PeasUpp',
-              title: context.tr('app.title'),
-              //title: AppLocalizations.of(context).tr('app.title'),
-              //title: Localizations.of(context, AppLocalizations).tr('app.title'),
-              //title: context.localizationService.translate('app.title'),
+              title: 'Loading...',
               theme: ThemeData(
                 colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF7abf17)),
                 useMaterial3: true,
@@ -82,8 +77,7 @@ class _MyAppState extends State<MyApp> {
                 appBar: AppBar(
                     backgroundColor: Theme.of(context).colorScheme.inversePrimary,
                     //backgroundColor: ColorScheme.fromSeed(brightness: Brightness.dark, seedColor: const Color(0xFF7abf17)).inversePrimary, // TODO check THEME system default settings
-                    title: Text(context.localizationService.translate('app.title')),
-                    //title: Text('PeasUpp'),
+                    title: Text('Loading...'),
                 ),
                 body: Center(
                   child: Column(
@@ -121,7 +115,7 @@ class _MyAppState extends State<MyApp> {
               useMaterial3: true,
             ), // standard dark theme
             themeMode: context.themeService.themeMode, // app theme controls
-            home: const HomePage(title: 'PeasUpp'),
+            home: const HomePage(),
             debugShowCheckedModeBanner: false,
           );
 
