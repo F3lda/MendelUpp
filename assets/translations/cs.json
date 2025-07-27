@@ -1,8 +1,8 @@
 {
   "app": {
-    "title": "PeasUpp EN"
+    "title": "PeasUpp CZ"
   },
-  "welcome": {
+  "menu": {
     "message": "Welcome to our application!"
   },
   "user": {

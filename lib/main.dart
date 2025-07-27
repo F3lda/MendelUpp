@@ -64,36 +64,23 @@ class _MyAppState extends State<MyApp> {
             return MaterialApp(
               title: 'Loading...',
               theme: ThemeData(
-                colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF7abf17)),
+                colorScheme: ColorScheme.fromSeed(seedColor: Colors.grey),
                 useMaterial3: true,
               ),
               darkTheme: ThemeData(
-                colorScheme: ColorScheme.fromSeed(brightness: Brightness.dark, seedColor: const Color(0xFF7abf17)),
+                colorScheme: ColorScheme.fromSeed(brightness: Brightness.dark, seedColor: Colors.grey),
                 useMaterial3: true,
               ), // standard dark theme
               themeMode: ThemeMode.system, // app theme controls
               home: Scaffold(
-                appBar: AppBar(
-                    backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-                    //backgroundColor: ColorScheme.fromSeed(brightness: Brightness.dark, seedColor: const Color(0xFF7abf17)).inversePrimary, // TODO check THEME system default settings
-                    title: Text('Loading...'),
-                ),
-                body: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      CircularProgressIndicator(),
-                      SizedBox(height: 16),
-                      Text('Loading...'),
-                    ],
-                  ),
-                ),
+                body: Center(child: CircularProgressIndicator()),
               ),
               debugShowCheckedModeBanner: false,
             );
 
           }
 
+          Color appColor = Color(int.tryParse(context.appConfigService.get<String>('app_color')) ?? 0);
           return MaterialApp(
             //title: 'PeasUpp',
             title: context.localizationService.translate('app.title'),
@@ -106,15 +93,15 @@ class _MyAppState extends State<MyApp> {
               GlobalCupertinoLocalizations.delegate,
             ],
             theme: ThemeData(
-              colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF7abf17)),
+              colorScheme: ColorScheme.fromSeed(seedColor: appColor),
               useMaterial3: true,
             ),
             darkTheme: ThemeData(
-              colorScheme: ColorScheme.fromSeed(brightness: Brightness.dark, seedColor: const Color(0xFF7abf17)),
+              colorScheme: ColorScheme.fromSeed(brightness: Brightness.dark, seedColor: appColor),
               useMaterial3: true,
             ), // standard dark theme
             themeMode: context.themeService.themeMode, // app theme controls
-            home: const HomePage(),
+            home: HomePage(),
             debugShowCheckedModeBanner: false,
           );
 

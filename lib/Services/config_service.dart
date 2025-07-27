@@ -21,7 +21,7 @@ class ConfigService extends AppStartupService {
     //await resetPreferences();
     await _loadFromAssets();
     await _loadFromPreferences();
-    //setPreference('app_version', '1.2.3');
+    //setPreference('theme_mode', 'dark');
   }
 
   Future<void> _loadFromAssets() async {
@@ -64,21 +64,20 @@ class ConfigService extends AppStartupService {
 
   void _setDefaultPreferences() {
     // Default user preferences
-    _config.addAll({
+    /*_config.addAll({
       'theme_mode': 'system',
       'notifications_enabled': true,
       'analytics_enabled': false,
       'language': 'en',
       'font_size': 14.0,
       'sound_enabled': true,
-    });
+    });*/
   }
 
   Future<void> _saveAllPreferences() async {
     try {
       // Filter out asset-based config, only save user preferences
-      final userSettings = [
-        'app_version', //test
+      /*final userSettings = [
         'theme_mode',
         'notifications_enabled',
         'analytics_enabled',
@@ -97,7 +96,7 @@ class ConfigService extends AppStartupService {
       // Save as single JSON string
       String configJson = json.encode(preferencesToSave);
       await _prefsAsync.setString('app_config', configJson);
-      print('Saved app config to preferences');
+      print('Saved app config to preferences');*/
     } catch (e) {
       print('Failed to save preferences: $e');
     }

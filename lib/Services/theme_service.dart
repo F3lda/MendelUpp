@@ -22,12 +22,11 @@ class ThemeService extends AppStartupService {
     if (savedThemeModeExists && savedThemeMode != _themeMode) {
       _themeMode = savedThemeMode;
     }
-    await Future.delayed(Duration(seconds: 2));
   }
 
   String getCurrentThemeName(BuildContext context) {
     if (themeMode == ThemeMode.system) {
-      return (Theme.of(context).brightness == Brightness.light ? '${themeModes[ThemeMode.system]??''} (${themeModes[ThemeMode.light]??''})' : '${themeModes[ThemeMode.system]??''} (${themeModes[ThemeMode.dark]??''})');
+      return (MediaQuery.of(context).platformBrightness == Brightness.light ? '${themeModes[ThemeMode.system]??''} (${themeModes[ThemeMode.light]??''})' : '${themeModes[ThemeMode.system]??''} (${themeModes[ThemeMode.dark]??''})');
     } else if (themeMode == ThemeMode.light) {
       return themeModes[ThemeMode.light] ?? '';
     } else if (themeMode == ThemeMode.dark)  {

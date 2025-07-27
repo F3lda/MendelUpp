@@ -4,6 +4,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/foundation.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../Libs/main_services_provider.dart';
 
@@ -11,6 +12,8 @@ class LocalizationService extends AppStartupService {
 
   @override
   String get serviceName => 'LocalizationService';
+
+  static const String _localePrefsKey = 'saved_locale';
 
   Map<String, dynamic> _localizedStrings = {};
   Map<String, dynamic> _englishStrings = {};
@@ -22,6 +25,7 @@ class LocalizationService extends AppStartupService {
   Locale get currentLocale => _currentLocale;
   List<Locale> get supportedLocales => _supportedLocales;
   bool get isInitialized => _isInitialized;
+  Locale get systemLocale => PlatformDispatcher.instance.locale;
 
   @override
   Future<void> initialize() async {
@@ -30,10 +34,24 @@ class LocalizationService extends AppStartupService {
     try {
       await _discoverSupportedLocales();
 
-      final systemLocale = PlatformDispatcher.instance.locale;
-      _currentLocale = _supportedLocales.contains(systemLocale)
-          ? systemLocale
-          : const Locale('en');
+      // Load saved locale from SharedPreferences first
+      final savedLocale = await getSavedLocale();
+
+      if (savedLocale != null && isLocaleSupported(savedLocale)) {
+        _currentLocale = savedLocale;
+        if (kDebugMode) {
+          print('LocalizationService: Using saved locale ${_currentLocale.languageCode}');
+        }
+      } else {
+        // Fall back to system locale if no saved locale or saved locale is not supported
+        final systemLocale = PlatformDispatcher.instance.locale;
+        _currentLocale = _supportedLocales.contains(systemLocale)
+            ? systemLocale
+            : const Locale('en');
+        if (kDebugMode) {
+          print('LocalizationService: Using system locale ${_currentLocale.languageCode}');
+        }
+      }
 
       await _loadEnglishTranslations();
       await _loadTranslations();
@@ -49,6 +67,88 @@ class LocalizationService extends AppStartupService {
       }
       _isInitialized = false;
       rethrow;
+    }
+  }
+
+  /// Save the current locale to SharedPreferences and switch to it
+  Future<void> saveLocale(BuildContext context, Locale locale) async {
+    // Check if locale is supported first
+    if (!isLocaleSupported(locale)) {
+      if (kDebugMode) {
+        print('LocalizationService: Cannot save unsupported locale ${locale.languageCode}');
+      }
+      return;
+    }
+
+    try {
+      final prefs = SharedPreferencesAsync();
+      await prefs.setString(_localePrefsKey, locale.languageCode);
+
+      if (kDebugMode) {
+        print('LocalizationService: Saved locale ${locale.languageCode} to preferences');
+      }
+
+      // Switch to the saved locale
+      await changeLocale(context, locale);
+    } catch (e) {
+      if (kDebugMode) {
+        print('LocalizationService: Failed to save locale to preferences: $e');
+      }
+    }
+  }
+
+  /// Load saved locale from SharedPreferences
+  Future<Locale?> getSavedLocale() async {
+    try {
+      final prefs = SharedPreferencesAsync();
+      final savedLanguageCode = await prefs.getString(_localePrefsKey);
+
+      if (savedLanguageCode != null && savedLanguageCode.isNotEmpty) {
+        if (kDebugMode) {
+          print('LocalizationService: Found saved locale $savedLanguageCode in preferences');
+        }
+        return Locale(savedLanguageCode);
+      }
+    } catch (e) {
+      if (kDebugMode) {
+        print('LocalizationService: Failed to load saved locale from preferences: $e');
+      }
+    }
+
+    return null;
+  }
+
+  /// Clear saved locale and switch to system locale
+  Future<void> setSystemLocale(BuildContext context) async {
+    try {
+      // Clear saved locale from SharedPreferences
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.remove(_localePrefsKey);
+
+      if (kDebugMode) {
+        print('LocalizationService: Cleared saved locale from preferences');
+      }
+
+      // Switch to system locale
+      final systemLocale = PlatformDispatcher.instance.locale;
+      final targetLocale = _supportedLocales.contains(systemLocale)
+          ? systemLocale
+          : const Locale('en');
+
+      if (_currentLocale.languageCode != targetLocale.languageCode) {
+        _currentLocale = targetLocale;
+        await _loadTranslations();
+
+        if (kDebugMode) {
+          print('LocalizationService: Switched to system locale ${targetLocale.languageCode}');
+        }
+
+        context.serviceChanged();
+      }
+    } catch (e) {
+      if (kDebugMode) {
+        print('LocalizationService: Failed to set system locale: $e');
+      }
     }
   }
 
@@ -158,21 +258,35 @@ class LocalizationService extends AppStartupService {
     }
   }
 
-  Future<void> changeLocale(Locale locale) async {
-    if (!_supportedLocales.contains(locale)) {
+  Future<void> changeLocale(BuildContext? context, Locale locale) async {
+    if (!isLocaleSupported(locale)) {
       if (kDebugMode) {
         print('LocalizationService: Locale ${locale.languageCode} not supported');
       }
       return;
     }
 
-    if (_currentLocale == locale) return;
+    if (_currentLocale.languageCode == locale.languageCode) return;
 
     _currentLocale = locale;
     await _loadTranslations();
 
+    // Save the new locale to SharedPreferences (but don't call changeLocale again to avoid recursion)
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString(_localePrefsKey, locale.languageCode);
+    } catch (e) {
+      if (kDebugMode) {
+        print('LocalizationService: Failed to save locale to preferences: $e');
+      }
+    }
+
     if (kDebugMode) {
       print('LocalizationService: Changed locale to ${locale.languageCode}');
+    }
+
+    if (context != null) {
+      context.serviceChanged();
     }
   }
 
@@ -180,9 +294,9 @@ class LocalizationService extends AppStartupService {
   bool isLocaleSupported(Locale locale) {
     if (!_isInitialized) {
       if (kDebugMode) {
-        print('LocalizationService: Service not initialized, cannot check locale support');
+        print('LocalizationService: Service not initialized, locale support may not be complete');
       }
-      return false;
+      //return false;
     }
 
     // Check exact match first (language + country)
@@ -485,7 +599,7 @@ class ServiceBasedAppLocalizationsDelegate extends LocalizationsDelegate<AppLoca
 
   @override
   Future<AppLocalizations> load(Locale locale) async {
-    await _changeLocale(locale);
+    await _changeLocale(null, locale);
     //await context.localizationService.changeLocale(locale);
     return AppLocalizations(); // allows usage: Localizations.of(context, AppLocalizations).tr('app.title')
   }

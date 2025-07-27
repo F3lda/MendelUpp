@@ -48,9 +48,14 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    Color appColor = Color(int.tryParse(context.appConfigService.get<String>('app_color')) ?? 0);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        //backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        backgroundColor: MediaQuery.of(context).platformBrightness == Brightness.light
+              ? ColorScheme.fromSeed(seedColor: appColor).inversePrimary
+              : ColorScheme.fromSeed(brightness: Brightness.dark, seedColor: appColor).inversePrimary,
+
         //title: Text(widget.title),
         //title: Text('app.title'.tr(context)),
         title: Text(context.tr('app.title')+' '+context.appConfigService.get('app_version')),

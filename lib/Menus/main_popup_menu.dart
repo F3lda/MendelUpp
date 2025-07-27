@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:mendelupp/Libs/main_services_provider.dart';
+import 'package:mendelupp/Services/localization_service.dart';
 import 'package:mendelupp/Services/theme_service.dart';
 
 import 'package:provider/provider.dart';
@@ -39,7 +41,8 @@ class _MenuState2 extends State<MainPopupMenu> {
             break;
 
           case _MenuOptions.languageSwitch:
-            // TODO switch CZ and EN language
+            // switch CZ and EN language
+            context.localizationService.saveLocale(context, (context.localizationService.currentLocale == const Locale('en')) ? const Locale('cs') : const Locale('en'));
             break;
 
           case _MenuOptions.loginLogout:
@@ -64,12 +67,11 @@ class _MenuState2 extends State<MainPopupMenu> {
         PopupMenuItem<_MenuOptions>(
           value: _MenuOptions.themeMode,
           child: Text('Toggle Theme [${context.themeService.getCurrentThemeName(context)}] '), // space at the end because of right padding
-          //child: Text('Toggle Theme'),
         ),
-        /*const PopupMenuItem<_MenuOptions>(
+        const PopupMenuItem<_MenuOptions>(
           value: _MenuOptions.languageSwitch,
-          child: Text('Změnit jazyk CZ/EN'),
-        ),*/
+          child: Text('Switch language: CZ/EN'),
+        ),
         PopupMenuItem<_MenuOptions>(
           value: _MenuOptions.loginLogout,
           //child: (widget.loggedInUsername == '') ? const Text('Přihlásit se') : const Text('Odhlásit se'),
