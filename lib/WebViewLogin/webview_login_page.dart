@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:mendelupp/Services/localization_service.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import '../Common/utils.dart';
@@ -155,7 +156,7 @@ class _WebViewLoginPageState extends State<WebViewLoginPage> {
                   await storage.write(key: "Mpassword", value: dataPassword);
 
                   if (mounted) {
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Logged in as: $dataLoggedin")));
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(context.tr('login_form.logged_as', params : {'username' : dataLoggedin}))));
                     Navigator.of(context).pop();
                   }
                 } else {
@@ -211,7 +212,7 @@ class _WebViewLoginPageState extends State<WebViewLoginPage> {
       await storage.write(key: "Musername", value: dataUsername);
       await storage.write(key: "Mpassword", value: dataPassword);
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Logged in as: $dataUsername")));
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(context.tr('login_form.logged_as', params : {'username' : dataLoggedin})))); // for GUEST
         Navigator.of(context).pop();
       }
     }

@@ -6,9 +6,6 @@ import 'package:mendelupp/WebViewRequest/webview_open_map.dart';
 import 'package:mendelupp/WebViewRequest/webview_open_menza.dart';
 import 'package:mendelupp/WebViewRequest/webview_open_student.dart';
 import 'package:mendelupp/Services/localization_service.dart';
-import 'package:mendelupp/main.dart';
-import 'package:url_launcher/url_launcher.dart';
-
 import 'package:mendelupp/Menus/main_popup_menu.dart';
 
 import 'package:flutter/foundation.dart';
@@ -29,9 +26,8 @@ class _HomePageState extends State<HomePage> {
   String loggedInUsername = "";
 
   Future<void> onLoggedIn() async {
-    const storage = FlutterSecureStorage();
-
     print("START");
+    const storage = FlutterSecureStorage();
     loggedInUsername = (await storage.read(key: "Mfullname")) ?? "";
     print(loggedInUsername);
     setState(() {});
@@ -41,8 +37,6 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
 
-
-
     onLoggedIn();
   }
 
@@ -51,14 +45,16 @@ class _HomePageState extends State<HomePage> {
     Color appColor = Color(int.tryParse(context.appConfigService.get<String>('app_color')) ?? 0);
     return Scaffold(
       appBar: AppBar(
+        // use this when loading other pages (Theme.of(context).colorScheme is already loaded)
         //backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        backgroundColor: MediaQuery.of(context).platformBrightness == Brightness.light
+        // use this when loading first page (Theme.of(context).colorScheme is not fully loaded)
+        backgroundColor: (Theme.of(context).colorScheme.inversePrimary != ColorScheme.fromSeed(seedColor: appColor).inversePrimary
+          && Theme.of(context).colorScheme.inversePrimary != ColorScheme.fromSeed(brightness: Brightness.dark, seedColor: appColor).inversePrimary)
+            ? (MediaQuery.of(context).platformBrightness == Brightness.light
               ? ColorScheme.fromSeed(seedColor: appColor).inversePrimary
-              : ColorScheme.fromSeed(brightness: Brightness.dark, seedColor: appColor).inversePrimary,
-
-        //title: Text(widget.title),
-        //title: Text('app.title'.tr(context)),
-        title: Text(context.tr('app.title')+' '+context.appConfigService.get('app_version')),
+              : ColorScheme.fromSeed(brightness: Brightness.dark, seedColor: appColor).inversePrimary)
+            : Theme.of(context).colorScheme.inversePrimary,
+        title: Text(context.tr('app.title')),
         actions: <Widget>[MainPopupMenu(onLoginStateChange: onLoggedIn, loggedInUsername: loggedInUsername)]
       ),
       body: SingleChildScrollView(child: Center(
@@ -68,8 +64,8 @@ class _HomePageState extends State<HomePage> {
 
             Center(child: Padding(padding: const EdgeInsets.symmetric(vertical:15, horizontal: 10), child: Column(children: [
               Text(
-                (loggedInUsername != "") ? '$loggedInUsername, welcome!' : 'Welcome!', textAlign: TextAlign.center,
-                //(loggedInUsername != "") ? '$loggedInUsername, vítejte!' : 'Vítejte!\nPřihlašte se do aplikace.', textAlign: TextAlign.center,
+                (loggedInUsername != "") ? context.tr('home_page.greeting', params: {'name' : loggedInUsername}) : context.tr('home_page.welcome'),
+                textAlign: TextAlign.center,
                 style: const TextStyle(
                   //color: Colors.white,
                   fontSize: 34.0,
@@ -77,20 +73,19 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               if (loggedInUsername == "") Text(
-                'Log in to the app to access the Student Portal and the Menza.', textAlign: TextAlign.center,
-                //(loggedInUsername != "") ? '$loggedInUsername, vítejte!' : 'Vítejte!\nPřihlašte se do aplikace.', textAlign: TextAlign.center,
+                context.tr('home_page.message'),
+                textAlign: TextAlign.center,
                 style: const TextStyle(
                   //color: Colors.white,
                     fontSize: 26.0,
                     fontWeight: FontWeight.bold
                 ),
               ),
-            ]),
-            ),),
+            ]),),),
 
             if (loggedInUsername != "") CardButton(
               color: null,
-              image: const AssetImage("assets/images/StudentPortal.png"),
+              image: AssetImage(context.appConfigService.get('student_portal_img')),
               text: "Student Portal", onTap: () {
                 if (defaultTargetPlatform == TargetPlatform.iOS || defaultTargetPlatform == TargetPlatform.android) {
                   // Some android/ios specific code
@@ -109,7 +104,7 @@ class _HomePageState extends State<HomePage> {
 
             if (loggedInUsername != "") CardButton(
               color: null,
-              image: const AssetImage("assets/images/menza.jpg"),
+              image: AssetImage(context.appConfigService.get('menza_iskam_img')),
               text: "Menza - ISKAM", onTap: () {
                 if (defaultTargetPlatform == TargetPlatform.iOS || defaultTargetPlatform == TargetPlatform.android) {
                   // Some android/ios specific code
@@ -128,7 +123,7 @@ class _HomePageState extends State<HomePage> {
 
             CardButton(
               color: null,
-              image: const AssetImage("assets/images/MyMendelu-map.png"),
+              image: AssetImage(context.appConfigService.get('map_widget_img')),
               text: "Map Widget", onTap: () {
                 if (defaultTargetPlatform == TargetPlatform.iOS || defaultTargetPlatform == TargetPlatform.android) {
                   // Some android/ios specific code
@@ -141,9 +136,9 @@ class _HomePageState extends State<HomePage> {
 
             CardButton(
               color: null,
-              image: const AssetImage("assets/images/MojeMendelu.png"),
+              image: AssetImage(context.appConfigService.get('moje_mendelu_img')),
               text: "Moje MEMNDELU", onTap: () {
-                launchInBrowser(context, Uri.parse("https://moje.mendelu.cz/"));
+                launchInBrowser(context, Uri.parse(context.appConfigService.get('moje_mendelu_url')));
               }
             ),
 

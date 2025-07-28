@@ -1,21 +1,27 @@
 {
   "app": {
-    "title": "PeasUpp CZ"
+    "title": "PeasUpp"
   },
-  "menu": {
-    "message": "Welcome to our application!"
+  "home_page": {
+    "welcome": "Vítejte!",
+    "greeting": "{name}, vítejte!",
+    "message": "Přihlašte se do aplikace pro přístup do Student Portálu a Menzy."
   },
-  "user": {
-    "greeting": "Hello, {name}!"
+  "dropdown_menu": {
+    "toggle_theme": "Změnit motiv [{theme}]",
+    "switch_language": "Změnit jazyk: CZ -> EN",
+    "login": "Přihlásit se",
+    "logout": "Odhlásit se"
   },
+  "login_form": {
+    "logged_as": "Přihlášen jako: {username}"
+  },
+
   "items": {
     "count": {
       "zero": "No items",
       "one": "One item",
       "other": "{count} items"
     }
-  },
-  "direct": {
-    "access": "This uses direct service access"
   }
 }

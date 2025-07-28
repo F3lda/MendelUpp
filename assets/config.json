@@ -1,4 +1,12 @@
 {
   "app_version" : "9.9.9",
-  "app_color" : "0xFF7abf17"
+  "app_color" : "0xFF7abf17",
+
+  "student_portal_img" : "assets/images/StudentPortal.png",
+  "menza_iskam_img" : "assets/images/menza.jpg",
+  "map_widget_img" : "assets/images/MyMendelu-map.png",
+  "moje_mendelu_img" : "assets/images/MojeMendelu.png",
+
+
+  "moje_mendelu_url" : "https://moje.mendelu.cz/"
 }

@@ -8,11 +8,8 @@ import 'ChangeNotifiers/app_theme_change_notify.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/foundation.dart';
 
-import 'Services/analytics_service .dart';
 import 'Services/localization_service.dart';
-import 'Services/notification_service.dart';
 import 'Services/theme_service.dart';
-import 'Services/user_service.dart';
 
 
 //flutter packages get -> to get packages

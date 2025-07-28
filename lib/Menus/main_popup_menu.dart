@@ -1,13 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:mendelupp/Libs/main_services_provider.dart';
 import 'package:mendelupp/Services/localization_service.dart';
 import 'package:mendelupp/Services/theme_service.dart';
-
-import 'package:provider/provider.dart';
-import '../ChangeNotifiers/app_theme_change_notify.dart';
-
 
 import '../WebViewLogin/webview_login_page.dart';
 
@@ -41,7 +36,7 @@ class _MenuState2 extends State<MainPopupMenu> {
             break;
 
           case _MenuOptions.languageSwitch:
-            // switch CZ and EN language
+            // switch CZ and EN languages
             context.localizationService.saveLocale(context, (context.localizationService.currentLocale == const Locale('en')) ? const Locale('cs') : const Locale('en'));
             break;
 
@@ -66,16 +61,15 @@ class _MenuState2 extends State<MainPopupMenu> {
       itemBuilder: (context) => [
         PopupMenuItem<_MenuOptions>(
           value: _MenuOptions.themeMode,
-          child: Text('Toggle Theme [${context.themeService.getCurrentThemeName(context)}] '), // space at the end because of right padding
+          child: Text('${context.tr('dropdown_menu.toggle_theme', params : {'theme' : context.themeService.getCurrentThemeName(context)})} '), // space at the end because of right padding
         ),
-        const PopupMenuItem<_MenuOptions>(
+        PopupMenuItem<_MenuOptions>(
           value: _MenuOptions.languageSwitch,
-          child: Text('Switch language: CZ/EN'),
+          child: Text(context.tr('dropdown_menu.switch_language')),
         ),
         PopupMenuItem<_MenuOptions>(
           value: _MenuOptions.loginLogout,
-          //child: (widget.loggedInUsername == '') ? const Text('Přihlásit se') : const Text('Odhlásit se'),
-          child: (widget.loggedInUsername == '') ? const Text('Log in') : const Text('Log out'),
+          child: (widget.loggedInUsername == '') ? Text(context.tr('dropdown_menu.login')) : Text(context.tr('dropdown_menu.logout')),
         ),
       ],
     );

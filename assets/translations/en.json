@@ -1,21 +1,27 @@
 {
   "app": {
-    "title": "PeasUpp EN"
+    "title": "PeasUpp"
   },
-  "welcome": {
-    "message": "Welcome to our application!"
+  "home_page": {
+    "welcome": "Welcome!",
+    "greeting": "{name}, welcome!",
+    "message": "Log in to the app to access the Student Portal and the Menza."
   },
-  "user": {
-    "greeting": "Hello, {name}!"
+  "dropdown_menu": {
+    "toggle_theme": "Toggle Theme [{theme}]",
+    "switch_language": "Switch language: EN -> CZ",
+    "login": "Log in",
+    "logout": "Log out"
   },
+  "login_form": {
+    "logged_as": "Logged in as: {username}"
+  },
+
   "items": {
     "count": {
       "zero": "No items",
       "one": "One item",
       "other": "{count} items"
     }
-  },
-  "direct": {
-    "access": "This uses direct service access"
   }
 }
